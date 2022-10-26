@@ -3,7 +3,7 @@
 Plugin Name: Global Shop Discount for WooCommerce
 Plugin URI: https://wpfactory.com/item/global-shop-discount-for-woocommerce/
 Description: Add global shop discount to all WooCommerce products. Beautifully.
-Version: 1.5.1
+Version: 1.5.2-dev
 Author: Algoritmika Ltd
 Author URI: https://algoritmika.com
 Text Domain: global-shop-discount-for-woocommerce
@@ -29,7 +29,7 @@ if ( 'global-shop-discount-for-woocommerce.php' === basename( __FILE__ ) ) {
 	}
 }
 
-defined( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_VERSION' ) || define( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_VERSION', '1.5.1' );
+defined( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_VERSION' ) || define( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_VERSION', '1.5.2-dev-20221026-1823' );
 
 defined( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE' ) || define( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE', __FILE__ );
 

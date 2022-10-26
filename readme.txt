@@ -42,6 +42,9 @@ Add global shop discount to all WooCommerce products. Beautifully.
 
 == Changelog ==
 
+= 1.5.2 - 26/10/2022 =
+* Add deploy script.
+
 = 1.5.1 - 27/07/2022 =
 * Dev - `[alg_wc_gsd_products]` shortcode added.
 * WC tested up to: 6.7.
