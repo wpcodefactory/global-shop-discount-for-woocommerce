@@ -34,7 +34,7 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	 * @version 1.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [p1] (dev) do this only once, e.g. in `version_updated()`?
+	 * @todo    (dev) do this only once, e.g. in `version_updated()`?
 	 */
 	function maybe_convert_and_update_option_value( $options ) {
 		foreach ( $options as $option ) {
@@ -57,7 +57,7 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	 * @see     https://developer.wordpress.org/reference/functions/get_terms/
 	 * @see     https://developer.wordpress.org/reference/classes/wp_term_query/__construct/
 	 *
-	 * @todo    [p1] (dev) add `' #' . $term->term_id`?
+	 * @todo    (dev) add `' #' . $term->term_id`?
 	 */
 	function get_terms( $taxonomy ) {
 		$args = array(
@@ -89,7 +89,7 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	 * @version 1.2.1
 	 * @since   1.2.1
 	 *
-	 * @todo    [p3] (dev) better title, e.g. `get_the_title()` etc.?
+	 * @todo    (dev) better title, e.g. `get_the_title()` etc.?
 	 */
 	function maybe_add_current_values( $values, $option_id, $title ) {
 		if ( is_array( $values ) ) {
@@ -131,13 +131,13 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	 * @version 1.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [p1] (dev) AJAX for terms and users selectors
-	 * @todo    [p1] (dev) Users: add `' #' . $user_id`?
-	 * @todo    [p1] (dev) Users: do we need `maybe_add_current_values()`?
-	 * @todo    [p1] (dev) `$i = $this->group_nr;`?
-	 * @todo    [p3] (desc) Admin title: better desc?
-	 * @todo    [p3] (desc) `alg_wc_global_shop_discount_dates_incl`: better desc and notes?
-	 * @todo    [p3] (feature) add `alg_wc_global_shop_discount_dates_excl`?
+	 * @todo    (dev) AJAX for terms and users selectors
+	 * @todo    (dev) Users: add `' #' . $user_id`?
+	 * @todo    (dev) Users: do we need `maybe_add_current_values()`?
+	 * @todo    (dev) `$i = $this->group_nr;`?
+	 * @todo    (desc) Admin title: better desc?
+	 * @todo    (desc) `alg_wc_global_shop_discount_dates_incl`: better desc and notes?
+	 * @todo    (feature) add `alg_wc_global_shop_discount_dates_excl`?
 	 */
 	function get_settings() {
 

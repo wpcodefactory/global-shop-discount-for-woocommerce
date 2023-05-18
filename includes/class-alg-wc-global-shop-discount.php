@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Main Class
  *
- * @version 1.4.0
+ * @version 1.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -91,10 +91,12 @@ final class Alg_WC_Global_Shop_Discount {
 	/**
 	 * Include required core files used in admin and on the frontend.
 	 *
-	 * @version 1.4.0
+	 * @version 1.6.0
 	 * @since   1.0.0
 	 */
 	function includes() {
+		// Functions
+		require_once( 'alg-wc-global-shop-discount-functions.php' );
 		// Core
 		$this->core = require_once( 'class-alg-wc-global-shop-discount-core.php' );
 	}

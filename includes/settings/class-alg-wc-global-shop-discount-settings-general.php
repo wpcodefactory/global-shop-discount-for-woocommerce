@@ -32,10 +32,10 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 	 * @version 1.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [p1] (dev) `alg_wc_global_shop_discount_taxonomies`: per group?
-	 * @todo    [p3] (desc) `alg_wc_global_shop_discount_taxonomies`: better desc?
-	 * @todo    [p3] (desc) `alg_wc_global_shop_discount_taxonomies`: move to the "General" subsection?
-	 * @todo    [p3] (desc) `alg_wc_global_shop_discount_total_groups`: better desc?
+	 * @todo    (dev) `alg_wc_global_shop_discount_taxonomies`: per group?
+	 * @todo    (desc) `alg_wc_global_shop_discount_taxonomies`: better desc?
+	 * @todo    (desc) `alg_wc_global_shop_discount_taxonomies`: move to the "General" subsection?
+	 * @todo    (desc) `alg_wc_global_shop_discount_total_groups`: better desc?
 	 */
 	function get_settings() {
 

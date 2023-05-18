@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Core Class
  *
- * @version 1.5.1
+ * @version 1.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,21 +17,17 @@ class Alg_WC_Global_Shop_Discount_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.5.1
+	 * @version 1.6.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [p1] (feature) fee instead of discount
-	 * @todo    [p2] (feature) regular price coefficient (`$this->product_get_regular_price_filter, 'woocommerce_variation_prices_regular_price', 'woocommerce_product_variation_get_regular_price'`)
-	 * @todo    [p3] (feature) "direct price"
+	 * @todo    (feature) fee instead of discount
+	 * @todo    (feature) regular price coefficient (`$this->product_get_regular_price_filter, 'woocommerce_variation_prices_regular_price', 'woocommerce_product_variation_get_regular_price'`)
+	 * @todo    (feature) "direct price"
 	 */
 	function __construct() {
 		if ( 'yes' === get_option( 'alg_wc_global_shop_discount_plugin_enabled', 'yes' ) ) {
 			if ( $this->is_frontend() ) {
-				$this->is_wc_version_below_3_0_0         = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
-				$this->product_get_price_filter          = ( $this->is_wc_version_below_3_0_0 ? 'woocommerce_get_price'         : 'woocommerce_product_get_price' );
-				$this->product_get_sale_price_filter     = ( $this->is_wc_version_below_3_0_0 ? 'woocommerce_get_sale_price'    : 'woocommerce_product_get_sale_price' );
-				$this->product_get_regular_price_filter  = ( $this->is_wc_version_below_3_0_0 ? 'woocommerce_get_regular_price' : 'woocommerce_product_get_regular_price' );
-				$this->init_options();
+				$this->init();
 				$this->price_hooks( PHP_INT_MAX, false );
 				add_shortcode( 'alg_wc_gsd_products', array( $this, 'products_shortcode' ) );
 			}
@@ -39,16 +35,76 @@ class Alg_WC_Global_Shop_Discount_Core {
 	}
 
 	/**
-	 * products_shortcode.
+	 * get_gsd_product_ids.
 	 *
-	 * @version 1.5.1
+	 * @version 1.6.0
+	 * @since   1.6.0
+	 *
+	 * @todo    (dev) modify `wc_product_meta_lookup` instead?
+	 * @todo    (dev) args: `$transient_expiration = DAY_IN_SECONDS`
+	 */
+	function get_gsd_product_ids( $product_query_args = array( 'limit' => -1 ), $incl_on_sale = true, $use_transient = false ) {
+
+		$md5 = md5( serialize( array_merge( $product_query_args, array( 'alg_wc_gsd_incl_on_sale' => $incl_on_sale ) ) ) );
+
+		if ( ! isset( $this->gsd_products[ $md5 ] ) ) {
+
+			$transient = false;
+
+			if ( $use_transient ) {
+				$transient = get_transient( 'alg_wc_gsd_products_' . $md5 );
+			}
+
+			if ( false === $transient ) {
+
+				$this->gsd_products[ $md5 ] = array();
+
+				if ( ! isset( $this->groups ) ) {
+					$this->init();
+				}
+
+				$all_products = wc_get_products( $product_query_args );
+
+				foreach ( $all_products as $product ) {
+
+					if (
+						( $incl_on_sale && $product->is_on_sale() ) ||
+						( $price = $product->get_price() ) != $this->add_global_shop_discount( $price, $product, 'price' )
+					) {
+						$this->gsd_products[ $md5 ][] = $product->get_id();
+					}
+
+				}
+
+				if ( $use_transient ) {
+					set_transient( 'alg_wc_gsd_products_' . $md5, $this->gsd_products[ $md5 ], DAY_IN_SECONDS );
+				}
+
+			} else {
+
+				$this->gsd_products[ $md5 ] = $transient;
+
+			}
+
+		}
+
+		return $this->gsd_products[ $md5 ];
+
+	}
+
+	/**
+	 * `[alg_wc_gsd_products]` shortcode.
+	 *
+	 * @version 1.6.0
 	 * @since   1.5.1
 	 *
-	 * @todo    [p1] (dev) `$atts`: `block_size`?
-	 * @todo    [p1] (dev) `$atts`: `transient_expiration`?
-	 * @todo    [p2] (dev) use `wc_get_products()`
+	 * @todo    (dev) use `get_gsd_product_ids()`
+	 * @todo    (dev) `$atts`: `block_size`?
+	 * @todo    (dev) `$atts`: `transient_expiration`?
+	 * @todo    (dev) use `wc_get_products()`
 	 */
 	function products_shortcode( $atts ) {
+
 		$product_ids_on_sale = false;
 		$do_use_transient    = ( isset( $atts['use_transient'] ) && filter_var( $atts['use_transient'], FILTER_VALIDATE_BOOLEAN ) );
 
@@ -59,6 +115,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 
 		// Get on-sale products
 		if ( false === $product_ids_on_sale ) {
+
 			$product_ids_on_sale = array();
 			$offset              = 0;
 			$block_size          = 1024;
@@ -80,11 +137,12 @@ class Alg_WC_Global_Shop_Discount_Core {
 				}
 				$offset += $block_size;
 			}
-		}
 
-		// Save cache
-		if ( $do_use_transient ) {
-			set_transient( 'alg_wc_gsd_products_onsale', $product_ids_on_sale, DAY_IN_SECONDS * 1 );
+			// Save cache
+			if ( $do_use_transient ) {
+				set_transient( 'alg_wc_gsd_products_onsale', $product_ids_on_sale, DAY_IN_SECONDS );
+			}
+
 		}
 
 		// Pass additional atts
@@ -101,15 +159,23 @@ class Alg_WC_Global_Shop_Discount_Core {
 
 		// Run [products] shortcode
 		return do_shortcode( '[products ids="' . implode( ',', $product_ids_on_sale ) . '"' . $_atts .  ']' );
+
 	}
 
 	/**
-	 * init_options.
+	 * init.
 	 *
-	 * @version 1.5.0
+	 * @version 1.6.0
 	 * @since   1.0.0
 	 */
-	function init_options() {
+	function init() {
+
+		// WC version and price filters
+		$this->is_wc_version_below_3_0_0         = version_compare( get_option( 'woocommerce_version', null ), '3.0.0', '<' );
+		$this->product_get_price_filter          = ( $this->is_wc_version_below_3_0_0 ? 'woocommerce_get_price'         : 'woocommerce_product_get_price' );
+		$this->product_get_sale_price_filter     = ( $this->is_wc_version_below_3_0_0 ? 'woocommerce_get_sale_price'    : 'woocommerce_product_get_sale_price' );
+		$this->product_get_regular_price_filter  = ( $this->is_wc_version_below_3_0_0 ? 'woocommerce_get_regular_price' : 'woocommerce_product_get_regular_price' );
+
 		// Groups
 		$total_groups  = apply_filters( 'alg_wc_global_shop_discount_total_groups', 1 );
 		$group_options = array(
@@ -135,8 +201,10 @@ class Alg_WC_Global_Shop_Discount_Core {
 				$this->groups[ $option ][ $i ] = ( isset( $this->groups[ $option ][ $i ] ) ? $this->groups[ $option ][ $i ] : $default );
 			}
 		}
+
 		// Options
 		$this->do_stop_on_first_discount_group = ( 'yes' === get_option( 'alg_wc_global_shop_discount_stop_on_first_discount_group', 'yes' ) );
+
 	}
 
 	/**
@@ -155,13 +223,15 @@ class Alg_WC_Global_Shop_Discount_Core {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [p2] (feature) global shipping discount
+	 * @todo    (feature) global shipping discount
 	 */
 	function price_hooks( $priority, $include_shipping = true, $action_func = 'add_filter' ) {
+
 		// Prices
 		$action_func( $this->product_get_price_filter,                       array( $this, 'change_price' ),              $priority, 2 );
 		$action_func( $this->product_get_sale_price_filter,                  array( $this, 'change_price' ),              $priority, 2 );
 		$action_func( $this->product_get_regular_price_filter,               array( $this, 'change_price' ),              $priority, 2 );
+
 		// Variations
 		$action_func( 'woocommerce_variation_prices_price',                  array( $this, 'change_price' ),              $priority, 2 );
 		$action_func( 'woocommerce_variation_prices_regular_price',          array( $this, 'change_price' ),              $priority, 2 );
@@ -172,13 +242,16 @@ class Alg_WC_Global_Shop_Discount_Core {
 			$action_func( 'woocommerce_product_variation_get_regular_price', array( $this, 'change_price' ),              $priority, 2 );
 			$action_func( 'woocommerce_product_variation_get_sale_price',    array( $this, 'change_price' ),              $priority, 2 );
 		}
+
 		// Shipping
 		if ( $include_shipping ) {
 			$action_func( 'woocommerce_package_rates',                       array( $this, 'change_price_shipping' ),     $priority, 2 );
 		}
+
 		// Grouped products
 		$action_func( 'woocommerce_get_price_including_tax',                 array( $this, 'change_price_grouped' ),      $priority, 3 );
 		$action_func( 'woocommerce_get_price_excluding_tax',                 array( $this, 'change_price_grouped' ),      $priority, 3 );
+
 	}
 
 	/**
@@ -318,7 +391,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 	 * @version 1.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [p1] (dev) `has_term()`?
+	 * @todo    (dev) `has_term()`?
 	 */
 	function is_product_term( $product_id, $term_ids, $taxonomy ) {
 		if ( empty( $term_ids ) ) {
@@ -342,7 +415,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 	 * @version 1.2.0
 	 * @since   1.2.0
 	 *
-	 * @todo    [p1] (dev) pre-calculate this?
+	 * @todo    (dev) pre-calculate this?
 	 */
 	function maybe_convert_to_array( $value ) {
 		return ( ! is_array( $value ) ? array_map( 'trim', explode( ',', $value ) ) : $value );
@@ -354,7 +427,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 	 * @version 1.4.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [p1] (feature) by product meta, e.g. `total_sales`
+	 * @todo    (feature) by product meta, e.g. `total_sales`
 	 */
 	function is_enabled_for_product( $product_id, $args ) {
 		// Products

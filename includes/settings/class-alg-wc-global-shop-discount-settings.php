@@ -69,7 +69,7 @@ class Alg_WC_Global_Shop_Discount_Settings extends WC_Settings_Page {
 	 * @version 1.1.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [p2] (dev) add notice
+	 * @todo    (dev) add notice
 	 */
 	function maybe_reset_settings() {
 		global $current_section;
