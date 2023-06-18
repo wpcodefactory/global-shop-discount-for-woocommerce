@@ -3,12 +3,12 @@
 Plugin Name: Global Shop Discount for WooCommerce
 Plugin URI: https://wpfactory.com/item/global-shop-discount-for-woocommerce/
 Description: Add global shop discount to all WooCommerce products. Beautifully.
-Version: 1.6.0
+Version: 1.6.1
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: global-shop-discount-for-woocommerce
 Domain Path: /langs
-WC tested up to: 7.7
+WC tested up to: 7.8
 */
 
 defined( 'ABSPATH' ) || exit;
