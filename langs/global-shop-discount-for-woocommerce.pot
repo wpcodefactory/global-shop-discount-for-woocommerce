@@ -46,41 +46,52 @@ msgid "Advanced Options"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:91
-msgid "Stop on first matching discount group"
+msgid "Apply discounts in backend"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:92
 msgid ""
-"Enable this if you want to stop applying discounts for product, when first "
-"matching discount group is found."
+"This will show the discounted prices in the admin area as well. E.g., in the "
+"\"Products\" list."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:93
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:101
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:171
 msgid "Enable"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:99
-msgid "Taxonomies"
+msgid "Stop on first matching discount group"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:100
-msgid "Taxonomies for the \"Include/Exclude\" options."
+msgid ""
+"Enable this if you want to stop applying discounts for product, when first "
+"matching discount group is found."
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:107
+msgid "Taxonomies"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:108
-msgid "Taxonomies sorting in admin settings"
-msgstr ""
-
-#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:114
-msgid "Name"
-msgstr ""
-
-#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:115
-msgid "ID"
+msgid "Taxonomies for the \"Include/Exclude\" options."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:116
+msgid "Taxonomies sorting in admin settings"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:122
+msgid "Name"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:123
+msgid "ID"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:124
 msgid "Parent"
 msgstr ""
 

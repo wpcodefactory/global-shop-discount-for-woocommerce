@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - General Section Settings
  *
- * @version 1.5.0
+ * @version 1.7.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.5.0
+	 * @version 1.7.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `alg_wc_global_shop_discount_taxonomies`: per group?
@@ -86,6 +86,14 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 				'title'    => __( 'Advanced Options', 'global-shop-discount-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_global_shop_discount_advanced_options',
+			),
+			array(
+				'title'    => __( 'Apply discounts in backend', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip' => __( 'This will show the discounted prices in the admin area as well. E.g., in the "Products" list.', 'global-shop-discount-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'global-shop-discount-for-woocommerce' ),
+				'id'       => 'alg_wc_global_shop_discount_load_in_admin',
+				'default'  => 'no',
+				'type'     => 'checkbox',
 			),
 			array(
 				'title'    => __( 'Stop on first matching discount group', 'global-shop-discount-for-woocommerce' ),
