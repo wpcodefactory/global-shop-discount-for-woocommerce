@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Core Class
  *
- * @version 1.7.0
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -64,6 +64,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 	 * @version 1.6.0
 	 * @since   1.6.0
 	 *
+	 * @todo    (dev) [!] `remove_filter`?
 	 * @todo    (dev) modify `wc_product_meta_lookup` instead?
 	 * @todo    (dev) args: `$transient_expiration = DAY_IN_SECONDS`
 	 */
@@ -119,7 +120,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 	/**
 	 * init.
 	 *
-	 * @version 1.6.0
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 */
 	function init() {
@@ -136,6 +137,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 			'enabled'          => 'yes',
 			'coefficient_type' => 'percent',
 			'coefficient'      => 0,
+			'round_func'       => '',
 			'dates_incl'       => '',
 			'product_scope'    => 'all',
 			'products_incl'    => array(),
@@ -282,13 +284,24 @@ class Alg_WC_Global_Shop_Discount_Core {
 	/**
 	 * calculate_price.
 	 *
-	 * @version 1.0.0
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 */
 	function calculate_price( $price, $coefficient, $group ) {
-		$price        = ( float ) $price;
-		$return_price = ( 'percent' === $this->groups['coefficient_type'][ $group ] ? ( $price + $price * ( $coefficient / 100 ) ) : ( $price + $coefficient ) );
+
+		$price = (float) $price;
+
+		// Coefficient
+		$return_price = ( 'percent' === $this->groups['coefficient_type'][ $group ] ?
+			( $price + $price * ( $coefficient / 100 ) ) : ( $price + $coefficient ) );
+
+		// Rounding
+		if ( '' != ( $round_func = $this->groups['round_func'][ $group ] ) ) {
+			$return_price = $round_func( $return_price );
+		}
+
 		return ( $return_price >= 0 ? $return_price : 0 );
+
 	}
 
 	/**

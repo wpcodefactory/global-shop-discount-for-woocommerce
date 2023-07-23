@@ -148,104 +148,124 @@ msgid "Must be negative number."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:204
+msgid "Rounding"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:210
+msgid "No rounding"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:211
+msgid "Round"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:212
+msgid "Round up"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:213
+msgid "Round down"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:217
 msgid "Date(s)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:206
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:219
 msgid "Accepted date format and examples"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:207
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:220
 #, php-format
 msgid "Current date: %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:209
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:222
 msgid "Set active date(s) for the current discount group."
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:210
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:223
 msgid "Ignored if empty."
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:216
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:229
 msgid "Product scope"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:217
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:230
 msgid ""
 "Possible values: all products, only products that are already on sale, only "
 "products that are not on sale."
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:223
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:236
 msgid "All products"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:224
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:237
 msgid "Only products that are already on sale"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:225
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:238
 msgid "Only products that are not on sale"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:237
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:250
 msgid "Products"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:242
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:284
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:316
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:255
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:297
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:329
 msgid "Include"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:243
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:285
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:256
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:298
 msgid ""
 "Set this field to apply discount to selected products only. Leave blank to "
 "apply to all products."
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:250
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:263
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:276
 msgid "Search for a product&hellip;"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:255
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:293
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:325
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:268
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:306
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:338
 msgid "Exclude"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:256
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:294
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:269
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:307
 msgid ""
 "Set this field to NOT apply discount to selected products. Leave blank to "
 "apply to all products."
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:290
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:299
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:303
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:312
 msgid "Term"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:311
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:324
 msgid "Users"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:317
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:330
 msgid ""
 "Set this field to apply discount to selected users only. Leave blank to "
 "apply to all users."
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:322
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:331
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:335
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:344
 msgid "User"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:326
+#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:339
 msgid ""
 "Set this field to NOT apply discount to selected users. Leave blank to apply "
 "to all users."

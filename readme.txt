@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, discount, global shop discount, woo commerce
 Requires at least: 4.4
 Tested up to: 6.2
-Stable tag: 1.7.0
+Stable tag: 1.8.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,6 +41,10 @@ Add global shop discount to all WooCommerce products. Beautifully.
 1. Discount settings.
 
 == Changelog ==
+
+= 1.8.0 - 23/07/2023 =
+* Dev - Discount Groups - "Rounding" options added ("No rounding" (default), "Round", "Round up", "Round down").
+* WC tested up to: 7.9.
 
 = 1.7.0 - 02/07/2023 =
 * Dev - General - "Apply discounts in backend" option added (defaults to `no`).

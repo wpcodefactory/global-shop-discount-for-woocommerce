@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Group Section Settings
  *
- * @version 1.5.0
+ * @version 1.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -128,7 +128,7 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.5.0
+	 * @version 1.8.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) AJAX for terms and users selectors
@@ -199,6 +199,19 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 				'default'  => 0,
 				'type'     => 'number',
 				'custom_attributes' => array( 'max' => 0, 'step' => 0.0001 ),
+			),
+			array(
+				'title'    => __( 'Rounding', 'global-shop-discount-for-woocommerce' ),
+				'id'       => "alg_wc_global_shop_discount_round_func[{$i}]",
+				'default'  => '',
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					''      => __( 'No rounding', 'global-shop-discount-for-woocommerce' ),
+					'round' => __( 'Round', 'global-shop-discount-for-woocommerce' ),
+					'ceil'  => __( 'Round up', 'global-shop-discount-for-woocommerce' ),
+					'floor' => __( 'Round down', 'global-shop-discount-for-woocommerce' ),
+				),
 			),
 			array(
 				'title'    => __( 'Date(s)', 'global-shop-discount-for-woocommerce' ),
