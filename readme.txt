@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, discount, global shop discount, woo commerce
 Requires at least: 4.4
 Tested up to: 6.2
-Stable tag: 1.8.0
+Stable tag: 1.9.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,13 +16,14 @@ Add global shop discount to all WooCommerce products. Beautifully.
 ### &#9989; Main Features ###
 
 * Set discounts as **percent** or as **fixed** values.
-* Optionally set **active date(s)** for the discount.
-* Optionally choose **products scope** (sale or non-sale products).
-* Optionally include/exclude **product categories**.
-* Optionally include/exclude **product tags**.
-* Optionally include/exclude **individual products**.
-* Optionally include/exclude **custom product taxonomies**, e.g. **product brands**.
-* Optionally include/exclude **users**.
+* Set **active date(s)** for the discount.
+* Choose **products scope** (sale or non-sale products).
+* Include/exclude **product categories**.
+* Include/exclude **product tags**.
+* Include/exclude **individual products**.
+* Include/exclude **custom product taxonomies**, e.g., **product brands**.
+* Include/exclude **users**.
+* Include/exclude **user roles**.
 * And more...
 
 ### &#128472; Feedback ###
@@ -41,6 +42,11 @@ Add global shop discount to all WooCommerce products. Beautifully.
 1. Discount settings.
 
 == Changelog ==
+
+= 1.9.0 - 31/07/2023 =
+* Dev - Discount Groups - "User roles" options added.
+* Dev - Tools - "Save prices in DB for all products" tool added.
+* Dev - Code refactoring.
 
 = 1.8.0 - 23/07/2023 =
 * Dev - Discount Groups - "Rounding" options added ("No rounding" (default), "Round", "Round up", "Round down").

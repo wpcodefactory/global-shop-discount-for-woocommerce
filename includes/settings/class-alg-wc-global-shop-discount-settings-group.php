@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Group Section Settings
  *
- * @version 1.8.0
+ * @version 1.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -86,18 +86,18 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	/**
 	 * maybe_add_current_values.
 	 *
-	 * @version 1.2.1
+	 * @version 1.9.0
 	 * @since   1.2.1
 	 *
 	 * @todo    (dev) better title, e.g. `get_the_title()` etc.?
 	 */
-	function maybe_add_current_values( $values, $option_id, $title ) {
+	function maybe_add_current_values( $values, $option_id, $title = false ) {
 		if ( is_array( $values ) ) {
 			$current_values = get_option( $option_id, array() );
 			if ( ! empty( $current_values[ $this->group_nr ] ) && is_array( $current_values[ $this->group_nr ] ) ) {
 				$_current_values = array();
 				foreach ( $current_values[ $this->group_nr ] as $value ) {
-					$_current_values[ $value ] = $title . ' #' . $value;
+					$_current_values[ $value ] = ( $title ? $title . ' #' . $value : $value );
 				}
 				$values = array_replace( $_current_values, $values );
 			}
@@ -128,7 +128,7 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.8.0
+	 * @version 1.9.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) AJAX for terms and users selectors
@@ -145,6 +145,10 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 
 		// Get users
 		$users = wp_list_pluck( get_users( array( 'fields' => array( 'ID', 'user_nicename' ) ) ), 'user_nicename', 'ID' );
+
+		// Get user roles
+		global $wp_roles;
+		$user_roles = wp_list_pluck( apply_filters( 'editable_roles', $wp_roles->roles ), 'name' );
 
 		// Get taxonomies
 		$all_taxonomies = array_combine( get_object_taxonomies( 'product', 'names' ), wp_list_pluck( get_object_taxonomies( 'product', 'objects' ), 'label' ) );
@@ -346,6 +350,37 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 			array(
 				'type'     => 'sectionend',
 				'id'       => "alg_wc_global_shop_discount_users_options_{$i}",
+			),
+		) );
+
+		// User Roles
+		$settings = array_merge( $settings, array(
+			array(
+				'title'    => __( 'User roles', 'global-shop-discount-for-woocommerce' ),
+				'type'     => 'title',
+				'id'       => "alg_wc_global_shop_discount_user_roles_options_{$i}",
+			),
+			array(
+				'title'    => __( 'Include', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip' => __( 'Set this field to apply discount to selected user roles only. Leave blank to apply to all user roles.', 'global-shop-discount-for-woocommerce' ),
+				'id'       => "alg_wc_global_shop_discount_user_roles_incl[{$i}]",
+				'type'     => 'multiselect',
+				'default'  => array(),
+				'class'    => 'chosen_select',
+				'options'  => $this->maybe_add_current_values( $user_roles, 'alg_wc_global_shop_discount_user_roles_incl' ),
+			),
+			array(
+				'title'    => __( 'Exclude', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip' => __( 'Set this field to NOT apply discount to selected user roles. Leave blank to apply to all user roles.', 'global-shop-discount-for-woocommerce' ),
+				'id'       => "alg_wc_global_shop_discount_user_roles_excl[{$i}]",
+				'type'     => 'multiselect',
+				'default'  => array(),
+				'class'    => 'chosen_select',
+				'options'  => $this->maybe_add_current_values( $user_roles, 'alg_wc_global_shop_discount_user_roles_excl' ),
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => "alg_wc_global_shop_discount_user_roles_options_{$i}",
 			),
 		) );
 

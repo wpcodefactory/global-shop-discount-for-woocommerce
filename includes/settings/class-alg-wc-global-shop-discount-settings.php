@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Settings
  *
- * @version 1.2.0
+ * @version 1.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,50 +17,60 @@ class Alg_WC_Global_Shop_Discount_Settings extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.2.0
+	 * @version 1.9.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
+
 		$this->id    = 'alg_wc_global_shop_discount';
 		$this->label = __( 'Global Shop Discount', 'global-shop-discount-for-woocommerce' );
+
 		parent::__construct();
+
 		// Sections
 		require_once( 'class-alg-wc-global-shop-discount-settings-section.php' );
+		require_once( 'class-alg-wc-global-shop-discount-settings-general.php' );
 		require_once( 'class-alg-wc-global-shop-discount-settings-group.php' );
-		$sections = array();
-		$sections['general'] = require_once( 'class-alg-wc-global-shop-discount-settings-general.php' );
 		for ( $i = 1; $i <= apply_filters( 'alg_wc_global_shop_discount_total_groups', 1 ); $i++ ) {
-			$sections[ 'group_' . $i ] = new Alg_WC_Global_Shop_Discount_Settings_Group( $i );
+			new Alg_WC_Global_Shop_Discount_Settings_Group( $i );
 		}
+		require_once( 'class-alg-wc-global-shop-discount-settings-tools.php' );
+
 	}
 
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.2.0
+	 * @version 1.9.0
 	 * @since   1.0.0
 	 */
 	function get_settings() {
 		global $current_section;
-		return array_merge( apply_filters( 'woocommerce_get_settings_' . $this->id . '_' . $current_section, array() ), array(
-			array(
-				'title'     => __( 'Reset Settings', 'global-shop-discount-for-woocommerce' ),
-				'type'      => 'title',
-				'id'        => $this->id . '_' . $current_section . '_reset_options',
-			),
-			array(
-				'title'     => __( 'Reset section settings', 'global-shop-discount-for-woocommerce' ),
-				'desc'      => '<strong>' . __( 'Reset', 'global-shop-discount-for-woocommerce' ) . '</strong>',
-				'desc_tip'  => __( 'Check the box and save changes to reset.', 'global-shop-discount-for-woocommerce' ),
-				'id'        => $this->id . '_' . $current_section . '_reset',
-				'default'   => 'no',
-				'type'      => 'checkbox',
-			),
-			array(
-				'type'      => 'sectionend',
-				'id'        => $this->id . '_' . $current_section . '_reset_options',
-			),
-		) );
+		return array_merge(
+			apply_filters( 'woocommerce_get_settings_' . $this->id . '_' . $current_section, array() ),
+			( 'tools' === $current_section ?
+				array() :
+				array(
+					array(
+						'title'     => __( 'Reset Settings', 'global-shop-discount-for-woocommerce' ),
+						'type'      => 'title',
+						'id'        => $this->id . '_' . $current_section . '_reset_options',
+					),
+					array(
+						'title'     => __( 'Reset section settings', 'global-shop-discount-for-woocommerce' ),
+						'desc'      => '<strong>' . __( 'Reset', 'global-shop-discount-for-woocommerce' ) . '</strong>',
+						'desc_tip'  => __( 'Check the box and save changes to reset.', 'global-shop-discount-for-woocommerce' ),
+						'id'        => $this->id . '_' . $current_section . '_reset',
+						'default'   => 'no',
+						'type'      => 'checkbox',
+					),
+					array(
+						'type'      => 'sectionend',
+						'id'        => $this->id . '_' . $current_section . '_reset_options',
+					),
+				)
+			)
+		);
 	}
 
 	/**
@@ -95,14 +105,24 @@ class Alg_WC_Global_Shop_Discount_Settings extends WC_Settings_Page {
 	/**
 	 * Save settings.
 	 *
-	 * @version 1.0.0
+	 * @version 1.9.0
 	 * @since   1.0.0
 	 */
 	function save() {
+
 		parent::save();
+
 		$this->maybe_reset_settings();
-		wp_safe_redirect( add_query_arg( '', '' ) );
-		exit;
+
+		do_action( 'alg_wc_global_shop_discount_settings_saved' );
+
+		global $current_section;
+		if ( '' === $current_section ) {
+			// for the "Total groups" option
+			wp_safe_redirect( add_query_arg( '', '' ) );
+			exit;
+		}
+
 	}
 
 }
