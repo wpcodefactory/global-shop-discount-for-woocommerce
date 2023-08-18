@@ -3,11 +3,11 @@
 msgid "Price saved for %d product(s)."
 msgstr ""
 
-#: includes/class-alg-wc-global-shop-discount.php:132
+#: includes/class-alg-wc-global-shop-discount.php:154
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-global-shop-discount.php:135
+#: includes/class-alg-wc-global-shop-discount.php:157
 msgid "Go Pro"
 msgstr ""
 
