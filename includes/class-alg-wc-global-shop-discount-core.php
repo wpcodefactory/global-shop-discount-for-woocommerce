@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Core Class
  *
- * @version 1.9.0
+ * @version 1.9.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -60,6 +60,16 @@ class Alg_WC_Global_Shop_Discount_Core {
 		// Tools
 		require_once( 'class-alg-wc-global-shop-discount-tools.php' );
 
+	}
+
+	/**
+	 * get_product_discount_groups.
+	 *
+	 * @version 1.9.2
+	 * @since   1.9.2
+	 */
+	function get_product_discount_groups( $product ) {
+		return $this->add_global_shop_discount( $this->get_product_price_raw( $product ), $product, 'price', 'get_groups' );
 	}
 
 	/**
@@ -590,13 +600,17 @@ class Alg_WC_Global_Shop_Discount_Core {
 	/**
 	 * add_global_shop_discount.
 	 *
-	 * @version 1.9.0
+	 * @version 1.9.2
 	 * @since   1.0.0
 	 */
-	function add_global_shop_discount( $price, $product, $price_type ) {
+	function add_global_shop_discount( $price, $product, $price_type, $action = 'get_price' ) {
 
 		if ( 'price' === $price_type && '' === $price ) {
 			return $price; // no changes
+		}
+
+		if ( 'get_groups' === $action ) {
+			$groups = array();
 		}
 
 		for ( $i = 1; $i <= apply_filters( 'alg_wc_global_shop_discount_total_groups', 1 ); $i++ ) {
@@ -608,22 +622,24 @@ class Alg_WC_Global_Shop_Discount_Core {
 				$this->check_if_applicable( $i, $product, $price, $price_type )
 			) {
 
-				// Discount applied
-				$price = $this->calculate_price(
-					( 'sale_price' === $price_type && empty( $price ) ? $product->get_regular_price() : $price ),
-					$coef,
-					$i
-				);
+				// Discount group applied
+				if ( 'get_groups' === $action ) {
+					$groups[] = $i;
+				} else {
+					$_price = ( 'sale_price' === $price_type && empty( $price ) ? $product->get_regular_price() : $price );
+					$price  = $this->calculate_price( $_price, $coef, $i );
+				}
 
+				// Maybe stop on first matching discount group
 				if ( $this->do_stop_on_first_discount_group ) {
-					return $price;
+					return ( 'get_groups' === $action ? $groups : $price );
 				}
 
 			}
 
 		}
 
-		return $price;
+		return ( 'get_groups' === $action ? $groups : $price );
 
 	}
 

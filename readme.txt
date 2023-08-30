@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, discount, global shop discount, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -26,6 +26,8 @@ Add global shop discount to all WooCommerce products. Beautifully.
 * Include/exclude **user roles**.
 * And more...
 
+### &#8505; More ###
+
 * The plugin is **"High-Performance Order Storage (HPOS)"** compatible.
 
 ### &#128472; Feedback ###
@@ -44,6 +46,10 @@ Add global shop discount to all WooCommerce products. Beautifully.
 1. Discount settings.
 
 == Changelog ==
+
+= 1.9.2 - 30/08/2023 =
+* Dev - Developers - `alg_wc_gsd_get_product_discount_groups()` function added.
+* Dev - Developers - `alg_wc_gsd_is_discount_product()` function added.
 
 = 1.9.1 - 18/08/2023 =
 * Dev – "High-Performance Order Storage (HPOS)" compatibility declared.
