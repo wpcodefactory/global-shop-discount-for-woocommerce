@@ -1,9 +1,9 @@
 === Global Shop Discount for WooCommerce ===
-Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
+Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
 Tags: woocommerce, discount, global shop discount, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 1.9.3
+Stable tag: 1.9.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,9 +47,13 @@ Add global shop discount to all WooCommerce products. Beautifully.
 
 == Changelog ==
 
+= 1.9.4 - 23/10/2023 =
+* Dev - Discount Groups - Date(s) - Admin settings link removed. Description and examples added.
+* WC tested up to: 8.2.
+
 = 1.9.3 - 26/09/2023 =
 * WC tested up to: 8.1.
-* Update plugin icon, banner.
+* Plugin icon, banner updated.
 
 = 1.9.2 - 30/08/2023 =
 * Dev - Developers - `alg_wc_gsd_get_product_discount_groups()` function added.

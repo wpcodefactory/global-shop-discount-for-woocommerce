@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Group Section Settings
  *
- * @version 1.9.0
+ * @version 1.9.4
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -126,9 +126,58 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	}
 
 	/**
+	 * style.
+	 *
+	 * @version 1.9.4
+	 * @since   1.9.4
+	 */
+	function style() {
+		?><style>
+			.alg-wc-global-shop-discount-details summary {
+				cursor: pointer;
+			}
+			.alg-wc-global-shop-discount-details pre {
+				background: rgba(0, 0, 0, 0.07);
+				padding: 10px;
+			}
+		</style><?php
+	}
+
+	/**
+	 * get_date_format_and_examples_desc.
+	 *
+	 * @version 1.9.4
+	 * @since   1.9.4
+	 */
+	function get_date_format_and_examples_desc() {
+		ob_start();
+		?><details class="alg-wc-global-shop-discount-details">
+			<summary><?php echo __( 'Accepted date format and examples', 'global-shop-discount-for-woocommerce' ); ?></summary>
+			<h4><?php echo __( 'Date format', 'global-shop-discount-for-woocommerce' ); ?></h4>
+			<p><?php printf( __( 'The option must be set as date range(s) in <code>from - to</code> format, i.e., dates must be separated by the hyphen <code>-</code> symbol, e.g.: %s', 'global-shop-discount-for-woocommerce' ),
+				'<pre>14.02.2021 15:00 - 26.02.2021 15:00</pre>' ); ?></p>
+			<p><?php echo __( 'You can add multiple date ranges separated by the semicolon <code>;</code> symbol, i.e., <code>from1 - to1; from2 - to2; ...</code>. The algorithm stops on the first matching date range.', 'global-shop-discount-for-woocommerce' ); ?></p>
+			<p><?php printf( __( 'Dates can be set in any format parsed by the PHP %s function. However, don\'t use the hyphen <code>-</code> symbol - it\'s reserved for separating <code>from</code> and <code>to</code> values.', 'global-shop-discount-for-woocommerce' ),
+				'<a href="https://www.php.net/manual/en/function.strtotime.php" target="_blank"><code>strtotime()</code></a>' ); ?></p>
+			<h4><?php echo __( 'Examples', 'global-shop-discount-for-woocommerce' ); ?></h4>
+			<p><?php printf( __( 'Enable discount on the exact dates: %s', 'global-shop-discount-for-woocommerce' ),
+				'<pre>14.02.2021 15:00 - 26.02.2021 15:00</pre>' ); ?></p>
+			<p><?php printf( __( 'Enable discount only before 3:00 PM each day: %s', 'global-shop-discount-for-woocommerce' ),
+				'<pre>00:00:00 - 14:59:59</pre>' ); ?></p>
+			<p><?php printf( __( 'Enable discount only before 3:00 PM each day, or before 5:00 PM on Mondays: %s', 'global-shop-discount-for-woocommerce' ),
+				'<pre>00:00:00 - 14:59:59; Monday 00:00:00 - Monday 16:59:59</pre>' ); ?></p>
+			<p><?php printf( __( 'Enable discount for the summer months only: %s', 'global-shop-discount-for-woocommerce' ),
+				'<pre>first day of June - last day of August 23:59:59</pre>' ); ?></p>
+			<p><?php printf( __( 'Enable discount for February only: %s', 'global-shop-discount-for-woocommerce' ),
+				'<pre>first day of February - last day of February 23:59:59</pre>' ); ?></p>
+		</details><?php
+		return ob_get_clean();
+	}
+
+	/**
 	 * get_settings.
 	 *
-	 * @version 1.9.0
+	 * @version 1.9.4
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) AJAX for terms and users selectors
@@ -142,6 +191,9 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	function get_settings() {
 
 		$i = $this->group_nr;
+
+		// Style
+		add_action( 'admin_footer', array( $this, 'style' ) );
 
 		// Get users
 		$users = wp_list_pluck( get_users( array( 'fields' => array( 'ID', 'user_nicename' ) ) ), 'user_nicename', 'ID' );
@@ -219,12 +271,10 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 			),
 			array(
 				'title'    => __( 'Date(s)', 'global-shop-discount-for-woocommerce' ),
-				'desc'     => '<a href="https://wpfactory.com/item/global-shop-discount-for-woocommerce/#section-date-format-and-examples" target="_blank">' .
-						__( 'Accepted date format and examples', 'global-shop-discount-for-woocommerce' ) . '</a>.' . ' ' .
-					sprintf( __( 'Current date: %s', 'global-shop-discount-for-woocommerce' ),
-						'<code>' . date( 'd.m.Y H:i:s', current_time( 'timestamp' ) ) . '</code>' ),
+				'desc'     => $this->get_date_format_and_examples_desc(),
 				'desc_tip' => __( 'Set active date(s) for the current discount group.', 'global-shop-discount-for-woocommerce' ) . ' ' .
-					__( 'Ignored if empty.', 'global-shop-discount-for-woocommerce' ),
+					__( 'Ignored if empty.', 'global-shop-discount-for-woocommerce' ) . '<br><br>' .
+					sprintf( __( 'Current date: %s', 'global-shop-discount-for-woocommerce' ), '<br>' . date( 'd.m.Y H:i:s', current_time( 'timestamp' ) ) ),
 				'id'       => "alg_wc_global_shop_discount_dates_incl[{$i}]",
 				'default'  => '',
 				'type'     => 'text',
