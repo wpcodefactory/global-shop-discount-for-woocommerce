@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - General Section Settings
  *
- * @version 1.7.0
+ * @version 1.9.5
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.7.0
+	 * @version 1.9.5
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `alg_wc_global_shop_discount_taxonomies`: per group?
@@ -123,6 +123,14 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 					'term_id' => __( 'ID', 'global-shop-discount-for-woocommerce' ),
 					'parent'  => __( 'Parent', 'global-shop-discount-for-woocommerce' ),
 				),
+			),
+			array(
+				'title'    => __( 'Cache product prices', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip' => __( 'Enable this if you have a compatibility (e.g., with a currency switcher plugin) issue, e.g., discount is applied twice.', 'global-shop-discount-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'global-shop-discount-for-woocommerce' ),
+				'id'       => 'alg_wc_global_shop_discount_cache_product_prices',
+				'default'  => 'no',
+				'type'     => 'checkbox',
 			),
 			array(
 				'type'     => 'sectionend',

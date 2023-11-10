@@ -62,6 +62,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:93
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:101
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:130
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:227
 msgid "Enable"
 msgstr ""
@@ -98,6 +99,16 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:124
 msgid "Parent"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:128
+msgid "Cache product prices"
+msgstr ""
+
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:129
+msgid ""
+"Enable this if you have a compatibility (e.g., with a currency switcher "
+"plugin) issue, e.g., discount is applied twice."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:26

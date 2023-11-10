@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Core Class
  *
- * @version 1.9.2
+ * @version 1.9.5
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,7 +17,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 	/**
 	 * public.
 	 *
-	 * @version 1.7.0
+	 * @version 1.9.5
 	 * @since   1.7.0
 	 */
 	public $is_wc_version_below_3_0_0;
@@ -28,6 +28,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 	public $do_stop_on_first_discount_group;
 	public $shortcodes;
 	public $gsd_products;
+	public $product_prices;
 
 	/**
 	 * Constructor.
@@ -600,13 +601,21 @@ class Alg_WC_Global_Shop_Discount_Core {
 	/**
 	 * add_global_shop_discount.
 	 *
-	 * @version 1.9.2
+	 * @version 1.9.5
 	 * @since   1.0.0
 	 */
 	function add_global_shop_discount( $price, $product, $price_type, $action = 'get_price' ) {
 
 		if ( 'price' === $price_type && '' === $price ) {
 			return $price; // no changes
+		}
+
+		$do_cache_prices = ( 'get_price' === $action && 'yes' === get_option( 'alg_wc_global_shop_discount_cache_product_prices', 'no' ) );
+		if ( $do_cache_prices ) {
+			$currency = get_woocommerce_currency();
+			if ( isset( $this->product_prices[ $product->get_id() ][ $price_type ][ $currency ] ) ) {
+				return $this->product_prices[ $product->get_id() ][ $price_type ][ $currency ];
+			}
 		}
 
 		if ( 'get_groups' === $action ) {
@@ -632,6 +641,9 @@ class Alg_WC_Global_Shop_Discount_Core {
 
 				// Maybe stop on first matching discount group
 				if ( $this->do_stop_on_first_discount_group ) {
+					if ( $do_cache_prices ) {
+						$this->product_prices[ $product->get_id() ][ $price_type ][ $currency ] = $price;
+					}
 					return ( 'get_groups' === $action ? $groups : $price );
 				}
 
@@ -639,6 +651,9 @@ class Alg_WC_Global_Shop_Discount_Core {
 
 		}
 
+		if ( $do_cache_prices ) {
+			$this->product_prices[ $product->get_id() ][ $price_type ][ $currency ] = $price;
+		}
 		return ( 'get_groups' === $action ? $groups : $price );
 
 	}
