@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Core Class
  *
- * @version 1.9.5
+ * @version 1.9.6
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -270,23 +270,6 @@ class Alg_WC_Global_Shop_Discount_Core {
 	}
 
 	/**
-	 * get_product_id_or_variation_parent_id.
-	 *
-	 * @version 1.0.0
-	 * @since   1.0.0
-	 */
-	function get_product_id_or_variation_parent_id( $_product ) {
-		if ( ! $_product || ! is_object( $_product ) ) {
-			return 0;
-		}
-		if ( $this->is_wc_version_below_3_0_0 ) {
-			return $_product->id;
-		} else {
-			return ( $_product->is_type( 'variation' ) ) ? $_product->get_parent_id() : $_product->get_id();
-		}
-	}
-
-	/**
 	 * get_product_display_price.
 	 *
 	 * @version 1.0.0
@@ -408,11 +391,10 @@ class Alg_WC_Global_Shop_Discount_Core {
 	/**
 	 * is_enabled_for_product_group.
 	 *
-	 * @version 1.4.0
+	 * @version 1.9.6
 	 * @since   1.0.0
 	 */
 	function is_enabled_for_product_group( $product, $group ) {
-		$product_id = $this->get_product_id_or_variation_parent_id( $product );
 		$args = array(
 			'include_products' => $this->groups['products_incl'][ $group ],
 			'exclude_products' => $this->groups['products_excl'][ $group ],
@@ -423,7 +405,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 			$args[ "include_{$id}" ] = $this->groups[ "{$id}_incl" ][ $group ];
 			$args[ "exclude_{$id}" ] = $this->groups[ "{$id}_excl" ][ $group ];
 		}
-		return $this->is_enabled_for_product( $product_id, $args );
+		return $this->is_enabled_for_product( $product, $args );
 	}
 
 	/**
@@ -437,27 +419,28 @@ class Alg_WC_Global_Shop_Discount_Core {
 	}
 
 	/**
-	 * is_product_term.
+	 * product_has_term.
 	 *
-	 * @version 1.0.0
+	 * @version 1.9.6
 	 * @since   1.0.0
 	 *
-	 * @todo    (dev) `has_term()`?
+	 * @see     https://developer.wordpress.org/reference/functions/has_term/
 	 */
-	function is_product_term( $product_id, $term_ids, $taxonomy ) {
-		if ( empty( $term_ids ) ) {
-			return false;
-		}
-		$product_terms = get_the_terms( $product_id, $taxonomy );
-		if ( empty( $product_terms ) ) {
-			return false;
-		}
-		foreach( $product_terms as $product_term ) {
-			if ( in_array( $product_term->term_id, $term_ids ) ) {
+	function product_has_term( $product_ids, $term_ids, $taxonomy ) {
+
+		// Term IDs
+		$term_ids = array_map( 'intval', $this->maybe_convert_to_array( $term_ids ) );
+
+		// Has term?
+		foreach ( $product_ids as $product_id ) {
+			if ( has_term( $term_ids, $taxonomy, $product_id ) ) {
 				return true;
 			}
 		}
+
+		// False
 		return false;
+
 	}
 
 	/**
@@ -475,32 +458,38 @@ class Alg_WC_Global_Shop_Discount_Core {
 	/**
 	 * is_enabled_for_product.
 	 *
-	 * @version 1.4.0
+	 * @version 1.9.6
 	 * @since   1.0.0
 	 *
-	 * @todo    (feature) by product meta, e.g. `total_sales`
+	 * @todo    (feature) by product meta, e.g., `total_sales`
 	 */
-	function is_enabled_for_product( $product_id, $args ) {
+	function is_enabled_for_product( $product, $args ) {
+
+		$product_ids = ( $product->is_type( 'variation' ) ? array( $product->get_id(), $product->get_parent_id() ) : array( $product->get_id() ) );
+
 		// Products
 		if (
-			( ! empty( $args['include_products'] ) && ! in_array( $product_id, $this->maybe_convert_to_array( $args['include_products'] ) ) ) ||
-			( ! empty( $args['exclude_products'] ) &&   in_array( $product_id, $this->maybe_convert_to_array( $args['exclude_products'] ) ) )
+			( ! empty( $args['include_products'] ) &&   empty( array_intersect( $product_ids, $this->maybe_convert_to_array( $args['include_products'] ) ) ) ) ||
+			( ! empty( $args['exclude_products'] ) && ! empty( array_intersect( $product_ids, $this->maybe_convert_to_array( $args['exclude_products'] ) ) ) )
 		) {
 			return false;
 		}
+
 		// Taxonomies
 		$taxonomies = get_option( 'alg_wc_global_shop_discount_taxonomies', array( 'product_cat', 'product_tag' ) );
 		foreach ( $taxonomies as $taxonomy ) {
 			$id = $this->get_taxonomy_option_id( $taxonomy );
 			if (
-				( ! empty( $args[ "include_{$id}" ] ) && ! $this->is_product_term( $product_id, $this->maybe_convert_to_array( $args[ "include_{$id}" ] ), $taxonomy ) ) ||
-				( ! empty( $args[ "exclude_{$id}" ] ) &&   $this->is_product_term( $product_id, $this->maybe_convert_to_array( $args[ "exclude_{$id}" ] ), $taxonomy ) )
+				( ! empty( $args[ "include_{$id}" ] ) && ! $this->product_has_term( $product_ids, $args[ "include_{$id}" ], $taxonomy ) ) ||
+				( ! empty( $args[ "exclude_{$id}" ] ) &&   $this->product_has_term( $product_ids, $args[ "exclude_{$id}" ], $taxonomy ) )
 			) {
 				return false;
 			}
 		}
+
 		// All passed
 		return true;
+
 	}
 
 	/**
