@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
 Tags: woocommerce, discount, global shop discount, woo commerce
 Requires at least: 4.4
-Tested up to: 6.4
-Stable tag: 1.9.6
+Tested up to: 6.5
+Stable tag: 1.9.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,6 +46,11 @@ Add global shop discount to all WooCommerce products. Beautifully.
 1. Discount settings.
 
 == Changelog ==
+
+= 1.9.7 - 12/05/2024 =
+* Dev - `[alg_wc_gsd_products]` shortcode - Minor code refactoring.
+* WC tested up to: 8.8.
+* Tested up to: 6.5.
 
 = 1.9.6 - 17/01/2024 =
 * Fix - Discount Groups - Products/Taxonomies - Checking variation ID now (vs. parent (variable) product ID only).
