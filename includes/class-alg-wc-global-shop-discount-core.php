@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Core Class
  *
- * @version 1.9.6
+ * @version 2.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,7 +17,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 	/**
 	 * public.
 	 *
-	 * @version 1.9.5
+	 * @version 2.0.0
 	 * @since   1.7.0
 	 */
 	public $is_wc_version_below_3_0_0;
@@ -29,6 +29,7 @@ class Alg_WC_Global_Shop_Discount_Core {
 	public $shortcodes;
 	public $gsd_products;
 	public $product_prices;
+	public $current_time;
 
 	/**
 	 * Constructor.

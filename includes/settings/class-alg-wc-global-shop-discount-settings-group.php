@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Group Section Settings
  *
- * @version 1.9.4
+ * @version 2.0.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -13,6 +13,14 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Settings_Group' ) ) :
 
 class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Discount_Settings_Section {
+
+	/**
+	 * group_nr.
+	 *
+	 * @version 2.0.0
+	 * @since   2.0.0
+	 */
+	public $group_nr;
 
 	/**
 	 * Constructor.
@@ -34,7 +42,7 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	 * @version 1.5.0
 	 * @since   1.0.0
 	 *
-	 * @todo    (dev) do this only once, e.g. in `version_updated()`?
+	 * @todo    (dev) do this only once, e.g., in `version_updated()`?
 	 */
 	function maybe_convert_and_update_option_value( $options ) {
 		foreach ( $options as $option ) {
@@ -89,7 +97,7 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	 * @version 1.9.0
 	 * @since   1.2.1
 	 *
-	 * @todo    (dev) better title, e.g. `get_the_title()` etc.?
+	 * @todo    (dev) better title, e.g., `get_the_title()` etc.?
 	 */
 	function maybe_add_current_values( $values, $option_id, $title = false ) {
 		if ( is_array( $values ) ) {

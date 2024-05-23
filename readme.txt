@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, discount, global shop discount, woo commerce
 Requires at least: 4.4
 Tested up to: 6.5
-Stable tag: 1.9.7
+Stable tag: 2.0.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,6 +46,13 @@ Add global shop discount to all WooCommerce products. Beautifully.
 1. Discount settings.
 
 == Changelog ==
+
+= 2.0.0 - 23/05/2024 =
+* Dev - PHP 8.2 compatibility - "Creation of dynamic property is deprecated" notice fixed.
+* Dev - Tools - "Delete transients" tool added.
+* Dev - Developers - `[alg_wc_gsd_products]` shortcode - `alg_wc_global_shop_discount_shortcode_product_ids` filter added.
+* WC tested up to: 8.9.
+* `woocommerce` added to the "Requires Plugins" (plugin header).
 
 = 1.9.7 - 12/05/2024 =
 * Dev - `[alg_wc_gsd_products]` shortcode - Minor code refactoring.
@@ -127,7 +134,7 @@ Add global shop discount to all WooCommerce products. Beautifully.
 * WC tested up to: 5.7.
 
 = 1.4.0 - 21/09/2021 =
-* Dev - General - "Taxonomies" option added (defaults to "Product categories" and "Product tags"). It's now possible to include/exclude various custom taxonomies in the discount groups, e.g. brands, product attributes, etc.
+* Dev - General - "Taxonomies" option added (defaults to "Product categories" and "Product tags"). It's now possible to include/exclude various custom taxonomies in the discount groups, e.g., brands, product attributes, etc.
 * Dev - Discount Groups - Admin settings restyled.
 * Dev - Plugin is initialized on the `plugins_loaded` action now.
 * Dev - Code refactoring.
@@ -140,7 +147,7 @@ Add global shop discount to all WooCommerce products. Beautifully.
 * WC tested up to: 5.0.
 
 = 1.2.1 - 27/01/2021 =
-* Dev - Settings - Include/Exclude products/product categories/tags - Making sure current values are added to the list. This will ensure that selected values do not disappear when changing site language in backend (e.g. with WPML), or when product/term is deleted.
+* Dev - Settings - Include/Exclude products/product categories/tags - Making sure current values are added to the list. This will ensure that selected values do not disappear when changing site language in backend (e.g., with WPML), or when product/term is deleted.
 
 = 1.2.0 - 26/01/2021 =
 * Dev - Use list instead of comma separated text for products in settings - Now applied to "Include/Exclude product categories/tags" options as well.

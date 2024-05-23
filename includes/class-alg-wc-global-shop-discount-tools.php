@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Tools Class
  *
- * @version 1.9.0
+ * @version 2.0.0
  * @since   1.9.0
  *
  * @author  Algoritmika Ltd.
@@ -27,18 +27,46 @@ class Alg_WC_Global_Shop_Discount_Tools {
 	/**
 	 * run_tools.
 	 *
-	 * @version 1.9.0
+	 * @version 2.0.0
 	 * @since   1.9.0
+	 *
+	 * @todo    (dev) Delete transients: `'alg_wc_gsd_products_' . $md5`?
 	 */
 	function run_tools() {
 
 		// Save prices in DB for all products
 		if ( 'yes' === get_option( 'alg_wc_global_shop_discount_tool_save_all_products', 'no' ) ) {
+
 			update_option( 'alg_wc_global_shop_discount_tool_save_all_products', 'no' );
+
 			$counter = $this->save_prices_for_all_products();
+
 			if ( method_exists( 'WC_Admin_Settings', 'add_message' ) ) {
 				WC_Admin_Settings::add_message( sprintf( esc_html__( 'Price saved for %d product(s).', 'global-shop-discount-for-woocommerce' ), $counter ) );
 			}
+
+		}
+
+		// Delete transients
+		if ( 'yes' === get_option( 'alg_wc_global_shop_discount_tool_delete_transients', 'no' ) ) {
+
+			update_option( 'alg_wc_global_shop_discount_tool_delete_transients', 'no' );
+
+			$transients = array( 'alg_wc_gsd_products_onsale' );
+
+			$deleted = 0;
+			foreach ( $transients as $transient ) {
+				if ( delete_transient( $transient ) ) {
+					$deleted++;
+				}
+			}
+
+			if ( method_exists( 'WC_Admin_Settings', 'add_message' ) ) {
+				$msg = sprintf( esc_html__( '%d transient(s) deleted.', 'global-shop-discount-for-woocommerce' ),
+					$deleted );
+				WC_Admin_Settings::add_message( $msg );
+			}
+
 		}
 
 	}

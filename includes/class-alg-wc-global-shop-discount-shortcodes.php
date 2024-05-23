@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Shortcodes Class
  *
- * @version 1.9.7
+ * @version 2.0.0
  * @since   1.7.0
  *
  * @author  Algoritmika Ltd.
@@ -27,7 +27,7 @@ class Alg_WC_Global_Shop_Discount_Shortcodes {
 	/**
 	 * `[alg_wc_gsd_products]` shortcode.
 	 *
-	 * @version 1.9.7
+	 * @version 2.0.0
 	 * @since   1.5.1
 	 *
 	 * @todo    (dev) use `get_gsd_product_ids()`
@@ -69,6 +69,9 @@ class Alg_WC_Global_Shop_Discount_Shortcodes {
 				}
 				$offset += $block_size;
 			}
+
+			// Filter
+			$product_ids_on_sale = apply_filters( 'alg_wc_global_shop_discount_shortcode_product_ids', $product_ids_on_sale, $atts );
 
 			// Save cache
 			if ( $do_use_transient ) {
