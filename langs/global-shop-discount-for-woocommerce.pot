@@ -1,15 +1,46 @@
+# Copyright (C) 2024 WPFactory
+# This file is distributed under the same license as the Global Shop Discount for WooCommerce Pro plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: global-shop-discount-for-woocommerce 2.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/global-shop-discount-for-woocommerce\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-07-30T17:35:53+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: global-shop-discount-for-woocommerce\n"
+
+#. Plugin Name of the plugin
+msgid "Global Shop Discount for WooCommerce Pro"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wpfactory.com/item/global-shop-discount-for-woocommerce/"
+msgstr ""
+
+#. Description of the plugin
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:51
+msgid "Add global shop discount to all WooCommerce products. Beautifully."
+msgstr ""
+
+#. Author of the plugin
+msgid "WPFactory"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://wpfactory.com"
+msgstr ""
+
 #: includes/class-alg-wc-global-shop-discount-tools.php:45
-#, php-format
 msgid "Price saved for %d product(s)."
 msgstr ""
 
 #: includes/class-alg-wc-global-shop-discount-tools.php:65
-#, php-format
 msgid "%d transient(s) deleted."
-msgstr ""
-
-#: includes/class-alg-wc-global-shop-discount.php:162
-msgid "Settings"
 msgstr ""
 
 #: includes/class-alg-wc-global-shop-discount.php:165
@@ -33,10 +64,6 @@ msgstr ""
 msgid "Enable plugin"
 msgstr ""
 
-#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:51
-msgid "Add global shop discount to all WooCommerce products. Beautifully."
-msgstr ""
-
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:64
 msgid "General Options"
 msgstr ""
@@ -46,9 +73,7 @@ msgid "Total groups"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:73
-msgid ""
-"Click \"Save changes\" after you change this number, and new settings "
-"sections will be displayed."
+msgid "Click \"Save changes\" after you change this number, and new settings sections will be displayed."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:86
@@ -60,9 +85,7 @@ msgid "Apply discounts in backend"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:92
-msgid ""
-"This will show the discounted prices in the admin area as well. E.g., in the "
-"\"Products\" list."
+msgid "This will show the discounted prices in the admin area as well. E.g., in the \"Products\" list."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:93
@@ -77,9 +100,7 @@ msgid "Stop on first matching discount group"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:100
-msgid ""
-"Enable this if you want to stop applying discounts for product, when first "
-"matching discount group is found."
+msgid "Enable this if you want to stop applying discounts for product, when first matching discount group is found."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:107
@@ -111,19 +132,15 @@ msgid "Cache product prices"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:129
-msgid ""
-"Enable this if you have a compatibility (e.g., with a currency switcher "
-"plugin) issue, e.g., discount is applied twice."
+msgid "Enable this if you have a compatibility (e.g., with a currency switcher plugin) issue, e.g., discount is applied twice."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:34
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:244
-#, php-format
 msgid "Discount Group #%d"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:131
-#, php-format
 msgid "Product #%d"
 msgstr ""
 
@@ -136,25 +153,15 @@ msgid "Date format"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:165
-#, php-format
-msgid ""
-"The option must be set as date range(s) in <code>from - to</code> format, i."
-"e., dates must be separated by the hyphen <code>-</code> symbol, e.g.: %s"
+msgid "The option must be set as date range(s) in <code>from - to</code> format, i.e., dates must be separated by the hyphen <code>-</code> symbol, e.g.: %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:167
-msgid ""
-"You can add multiple date ranges separated by the semicolon <code>;</code> "
-"symbol, i.e., <code>from1 - to1; from2 - to2; ...</code>. The algorithm "
-"stops on the first matching date range."
+msgid "You can add multiple date ranges separated by the semicolon <code>;</code> symbol, i.e., <code>from1 - to1; from2 - to2; ...</code>. The algorithm stops on the first matching date range."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:168
-#, php-format
-msgid ""
-"Dates can be set in any format parsed by the PHP %s function. However, don't "
-"use the hyphen <code>-</code> symbol - it's reserved for separating "
-"<code>from</code> and <code>to</code> values."
+msgid "Dates can be set in any format parsed by the PHP %s function. However, don't use the hyphen <code>-</code> symbol - it's reserved for separating <code>from</code> and <code>to</code> values."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:170
@@ -162,29 +169,22 @@ msgid "Examples"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:171
-#, php-format
 msgid "Enable discount on the exact dates: %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:173
-#, php-format
 msgid "Enable discount only before 3:00 PM each day: %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:175
-#, php-format
-msgid ""
-"Enable discount only before 3:00 PM each day, or before 5:00 PM on Mondays: "
-"%s"
+msgid "Enable discount only before 3:00 PM each day, or before 5:00 PM on Mondays: %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:177
-#, php-format
 msgid "Enable discount for the summer months only: %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:179
-#, php-format
 msgid "Enable discount for February only: %s"
 msgstr ""
 
@@ -193,7 +193,6 @@ msgid "Enabled"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:234
-#, php-format
 msgid "Enabled/disables discount group #%d."
 msgstr ""
 
@@ -262,7 +261,6 @@ msgid "Ignored if empty."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:285
-#, php-format
 msgid "Current date: %s"
 msgstr ""
 
@@ -271,9 +269,7 @@ msgid "Product scope"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:292
-msgid ""
-"Possible values: all products, only products that are already on sale, only "
-"products that are not on sale."
+msgid "Possible values: all products, only products that are already on sale, only products that are not on sale."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:298
@@ -301,14 +297,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:318
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:360
-msgid ""
-"Set this field to apply discount to selected products only. Leave blank to "
-"apply to all products."
-msgstr ""
-
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:325
-#: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:338
-msgid "Search for a product&hellip;"
+msgid "Set this field to apply discount to selected products only. Leave blank to apply to all products."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:330
@@ -320,9 +309,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:331
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:369
-msgid ""
-"Set this field to NOT apply discount to selected products. Leave blank to "
-"apply to all products."
+msgid "Set this field to NOT apply discount to selected products. Leave blank to apply to all products."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:365
@@ -335,9 +322,7 @@ msgid "Users"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:392
-msgid ""
-"Set this field to apply discount to selected users only. Leave blank to "
-"apply to all users."
+msgid "Set this field to apply discount to selected users only. Leave blank to apply to all users."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:397
@@ -346,9 +331,7 @@ msgid "User"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:401
-msgid ""
-"Set this field to NOT apply discount to selected users. Leave blank to apply "
-"to all users."
+msgid "Set this field to NOT apply discount to selected users. Leave blank to apply to all users."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:417
@@ -356,15 +339,11 @@ msgid "User roles"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:423
-msgid ""
-"Set this field to apply discount to selected user roles only. Leave blank to "
-"apply to all user roles."
+msgid "Set this field to apply discount to selected user roles only. Leave blank to apply to all user roles."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-group.php:432
-msgid ""
-"Set this field to NOT apply discount to selected user roles. Leave blank to "
-"apply to all user roles."
+msgid "Set this field to NOT apply discount to selected user roles. Leave blank to apply to all user roles."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-tools.php:25
@@ -373,7 +352,6 @@ msgid "Tools"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-tools.php:40
-#, php-format
 msgid "Check the %s box and \"Save changes\" to run the tool."
 msgstr ""
 
@@ -386,9 +364,7 @@ msgid "Delete transients"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-tools.php:47
-#, php-format
-msgid ""
-"The tool will delete the plugin's transients, e.g., for the %s shortcode."
+msgid "The tool will delete the plugin's transients, e.g., for the %s shortcode."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-tools.php:49
@@ -404,9 +380,7 @@ msgid "The tool will apply and save plugin's prices for all products in DB."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-tools.php:57
-msgid ""
-"You'll probably want to disable all plugin's discounts after running this "
-"tool."
+msgid "You'll probably want to disable all plugin's discounts after running this tool."
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-tools.php:58
