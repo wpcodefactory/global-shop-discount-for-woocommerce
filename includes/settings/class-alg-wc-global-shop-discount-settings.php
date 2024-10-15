@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Settings
  *
- * @version 1.9.0
+ * @version 2.2.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,7 +17,7 @@ class Alg_WC_Global_Shop_Discount_Settings extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.9.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -28,13 +28,13 @@ class Alg_WC_Global_Shop_Discount_Settings extends WC_Settings_Page {
 		parent::__construct();
 
 		// Sections
-		require_once( 'class-alg-wc-global-shop-discount-settings-section.php' );
-		require_once( 'class-alg-wc-global-shop-discount-settings-general.php' );
-		require_once( 'class-alg-wc-global-shop-discount-settings-group.php' );
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-global-shop-discount-settings-section.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-global-shop-discount-settings-general.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-global-shop-discount-settings-group.php';
 		for ( $i = 1; $i <= apply_filters( 'alg_wc_global_shop_discount_total_groups', 1 ); $i++ ) {
 			new Alg_WC_Global_Shop_Discount_Settings_Group( $i );
 		}
-		require_once( 'class-alg-wc-global-shop-discount-settings-tools.php' );
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-global-shop-discount-settings-tools.php';
 
 	}
 

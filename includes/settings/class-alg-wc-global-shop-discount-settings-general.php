@@ -61,23 +61,23 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 
 		$general_settings = array(
 			array(
-				'title'    => __( 'General Options', 'global-shop-discount-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_global_shop_discount_general_options',
+				'title'             => __( 'General Options', 'global-shop-discount-for-woocommerce' ),
+				'type'              => 'title',
+				'id'                => 'alg_wc_global_shop_discount_general_options',
 			),
 			array(
-				'title'    => __( 'Total groups', 'global-shop-discount-for-woocommerce' ),
-				'id'       => 'alg_wc_global_shop_discount_total_groups',
-				'default'  => 1,
-				'type'     => 'number',
-				'desc_tip' => __( 'Click "Save changes" after you change this number, and new settings sections will be displayed.', 'global-shop-discount-for-woocommerce' ),
-				'desc'     => apply_filters( 'alg_wc_global_shop_discount_settings', sprintf( 'You will need %s plugin to add more than one discount group.',
+				'title'             => __( 'Total groups', 'global-shop-discount-for-woocommerce' ),
+				'id'                => 'alg_wc_global_shop_discount_total_groups',
+				'default'           => 1,
+				'type'              => 'number',
+				'desc_tip'          => __( 'Click "Save changes" after you change this number, and new settings sections will be displayed.', 'global-shop-discount-for-woocommerce' ),
+				'desc'              => apply_filters( 'alg_wc_global_shop_discount_settings', sprintf( 'You will need %s plugin to add more than one discount group.',
 					'<a target="_blank" href="https://wpfactory.com/item/global-shop-discount-for-woocommerce/">' . 'Global Shop Discount for WooCommerce Pro' . '</a>' ) ),
 				'custom_attributes' => apply_filters( 'alg_wc_global_shop_discount_settings', array( 'readonly' => 'readonly' ), 'array' ),
 			),
 			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_global_shop_discount_general_options',
+				'type'              => 'sectionend',
+				'id'                => 'alg_wc_global_shop_discount_general_options',
 			),
 		);
 

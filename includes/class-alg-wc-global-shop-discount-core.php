@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Core Class
  *
- * @version 2.0.0
+ * @version 2.2.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -15,26 +15,89 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 class Alg_WC_Global_Shop_Discount_Core {
 
 	/**
-	 * public.
+	 * is_wc_version_below_3_0_0.
 	 *
 	 * @version 2.0.0
 	 * @since   1.7.0
 	 */
 	public $is_wc_version_below_3_0_0;
+
+	/**
+	 * product_get_price_filter.
+	 *
+	 * @version 2.0.0
+	 * @since   1.7.0
+	 */
 	public $product_get_price_filter;
+
+	/**
+	 * product_get_sale_price_filter.
+	 *
+	 * @version 2.0.0
+	 * @since   1.7.0
+	 */
 	public $product_get_sale_price_filter;
+
+	/**
+	 * product_get_regular_price_filter.
+	 *
+	 * @version 2.0.0
+	 * @since   1.7.0
+	 */
 	public $product_get_regular_price_filter;
+
+	/**
+	 * groups.
+	 *
+	 * @version 2.0.0
+	 * @since   1.7.0
+	 */
 	public $groups;
+
+	/**
+	 * do_stop_on_first_discount_group.
+	 *
+	 * @version 2.0.0
+	 * @since   1.7.0
+	 */
 	public $do_stop_on_first_discount_group;
+
+	/**
+	 * shortcodes.
+	 *
+	 * @version 2.0.0
+	 * @since   1.7.0
+	 */
 	public $shortcodes;
+
+	/**
+	 * gsd_products.
+	 *
+	 * @version 2.0.0
+	 * @since   1.7.0
+	 */
 	public $gsd_products;
+
+	/**
+	 * product_prices.
+	 *
+	 * @version 2.0.0
+	 * @since   1.7.0
+	 */
 	public $product_prices;
+
+	/**
+	 * current_time.
+	 *
+	 * @version 2.0.0
+	 * @since   1.7.0
+	 */
 	public $current_time;
 
 	/**
 	 * Constructor.
 	 *
-	 * @version 1.9.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 *
 	 * @todo    (feature) fee instead of discount
@@ -53,14 +116,14 @@ class Alg_WC_Global_Shop_Discount_Core {
 
 				$this->price_hooks( PHP_INT_MAX, false );
 
-				$this->shortcodes = require_once( 'class-alg-wc-global-shop-discount-shortcodes.php' );
+				$this->shortcodes = require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-global-shop-discount-shortcodes.php';
 
 			}
 
 		}
 
 		// Tools
-		require_once( 'class-alg-wc-global-shop-discount-tools.php' );
+		require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-global-shop-discount-tools.php';
 
 	}
 

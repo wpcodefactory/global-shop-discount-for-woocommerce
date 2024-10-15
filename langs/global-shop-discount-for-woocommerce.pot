@@ -8,11 +8,18 @@ msgstr ""
 msgid "%d transient(s) deleted."
 msgstr ""
 
-#: includes/class-alg-wc-global-shop-discount.php:162
+#: includes/class-alg-wc-global-shop-discount.php:212
+#: includes/class-alg-wc-global-shop-discount.php:213
+#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:49
+#: includes/settings/class-alg-wc-global-shop-discount-settings.php:26
+msgid "Global Shop Discount"
+msgstr ""
+
+#: includes/class-alg-wc-global-shop-discount.php:229
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-global-shop-discount.php:165
+#: includes/class-alg-wc-global-shop-discount.php:232
 msgid "Go Pro"
 msgstr ""
 
@@ -22,11 +29,6 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:44
 msgid "Global Shop Discount Options"
-msgstr ""
-
-#: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:49
-#: includes/settings/class-alg-wc-global-shop-discount-settings.php:26
-msgid "Global Shop Discount"
 msgstr ""
 
 #: includes/settings/class-alg-wc-global-shop-discount-settings-general.php:50
