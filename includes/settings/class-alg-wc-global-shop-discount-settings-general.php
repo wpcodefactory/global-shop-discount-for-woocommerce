@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - General Section Settings
  *
- * @version 1.9.5
+ * @version 2.2.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.9.5
+	 * @version 2.2.1
 	 * @since   1.0.0
 	 *
 	 * @todo    (dev) `alg_wc_global_shop_discount_taxonomies`: per group?
@@ -72,7 +72,7 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 				'type'              => 'number',
 				'desc_tip'          => __( 'Click "Save changes" after you change this number, and new settings sections will be displayed.', 'global-shop-discount-for-woocommerce' ),
 				'desc'              => apply_filters( 'alg_wc_global_shop_discount_settings', sprintf( 'You will need %s plugin to add more than one discount group.',
-					'<a target="_blank" href="https://wpfactory.com/item/global-shop-discount-for-woocommerce/">' . 'Global Shop Discount for WooCommerce Pro' . '</a>' ) ),
+					'<a target="_blank" href="https://wpfactory.com/item/global-shop-discount-for-woocommerce/">' . 'Sitewide Discount for WooCommerce: Apply Discount to All Products Pro' . '</a>' ) ),
 				'custom_attributes' => apply_filters( 'alg_wc_global_shop_discount_settings', array( 'readonly' => 'readonly' ), 'array' ),
 			),
 			array(
