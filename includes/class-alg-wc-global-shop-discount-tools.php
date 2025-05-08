@@ -42,7 +42,13 @@ class Alg_WC_Global_Shop_Discount_Tools {
 			$counter = $this->save_prices_for_all_products();
 
 			if ( method_exists( 'WC_Admin_Settings', 'add_message' ) ) {
-				WC_Admin_Settings::add_message( sprintf( esc_html__( 'Price saved for %d product(s).', 'global-shop-discount-for-woocommerce' ), $counter ) );
+				WC_Admin_Settings::add_message(
+					sprintf(
+						/* Translators: %d: Number of products. */
+						esc_html__( 'Price saved for %d product(s).', 'global-shop-discount-for-woocommerce' ),
+						$counter
+					)
+				);
 			}
 
 		}
@@ -62,8 +68,11 @@ class Alg_WC_Global_Shop_Discount_Tools {
 			}
 
 			if ( method_exists( 'WC_Admin_Settings', 'add_message' ) ) {
-				$msg = sprintf( esc_html__( '%d transient(s) deleted.', 'global-shop-discount-for-woocommerce' ),
-					$deleted );
+				$msg = sprintf(
+					/* Translators: %d: Number of transients. */
+					esc_html__( '%d transient(s) deleted.', 'global-shop-discount-for-woocommerce' ),
+					$deleted
+				);
 				WC_Admin_Settings::add_message( $msg );
 			}
 

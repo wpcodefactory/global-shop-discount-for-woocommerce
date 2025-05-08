@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Main Class
  *
- * @version 2.2.0
+ * @version 2.2.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -37,7 +37,7 @@ final class Alg_WC_Global_Shop_Discount {
 	protected static $_instance = null;
 
 	/**
-	 * Main Alg_WC_Global_Shop_Discount Instance
+	 * Main Alg_WC_Global_Shop_Discount Instance.
 	 *
 	 * Ensures only one instance of Alg_WC_Global_Shop_Discount is loaded or can be loaded.
 	 *
@@ -119,11 +119,17 @@ final class Alg_WC_Global_Shop_Discount {
 	 */
 	function wc_declare_compatibility() {
 		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-			$files = ( defined( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE_FREE' ) ?
+			$files = (
+				defined( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE_FREE' ) ?
 				array( ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE, ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE_FREE ) :
-				array( ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE ) );
+				array( ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE )
+			);
 			foreach ( $files as $file ) {
-				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $file, true );
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
+					'custom_order_tables',
+					$file,
+					true
+				);
 			}
 		}
 	}
@@ -147,7 +153,7 @@ final class Alg_WC_Global_Shop_Discount {
 	/**
 	 * admin.
 	 *
-	 * @version 2.2.0
+	 * @version 2.2.2
 	 * @since   1.1.0
 	 */
 	function admin() {
@@ -156,10 +162,10 @@ final class Alg_WC_Global_Shop_Discount {
 		add_filter( 'plugin_action_links_' . plugin_basename( ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE ), array( $this, 'action_links' ) );
 
 		// "Recommendations" page
-		$this->add_cross_selling_library();
+		add_action( 'init', array( $this, 'add_cross_selling_library' ) );
 
 		// WC Settings tab as WPFactory submenu item
-		$this->move_wc_settings_tab_to_wpfactory_menu();
+		add_action( 'init', array( $this, 'move_wc_settings_tab_to_wpfactory_menu' ) );
 
 		// Settings
 		add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
@@ -218,7 +224,7 @@ final class Alg_WC_Global_Shop_Discount {
 	/**
 	 * Show action links on the plugin screen.
 	 *
-	 * @version 1.4.0
+	 * @version 2.2.2
 	 * @since   1.0.0
 	 *
 	 * @param   mixed $links
@@ -226,11 +232,17 @@ final class Alg_WC_Global_Shop_Discount {
 	 */
 	function action_links( $links ) {
 		$custom_links = array();
-		$custom_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_global_shop_discount' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>';
+
+		$custom_links[] = '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_global_shop_discount' ) . '">' .
+			__( 'Settings', 'global-shop-discount-for-woocommerce' ) .
+		'</a>';
+
 		if ( 'global-shop-discount-for-woocommerce.php' === basename( ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE ) ) {
 			$custom_links[] = '<a target="_blank" style="font-weight: bold; color: green;" href="https://wpfactory.com/item/global-shop-discount-for-woocommerce/">' .
-				__( 'Go Pro', 'global-shop-discount-for-woocommerce' ) . '</a>';
+				__( 'Go Pro', 'global-shop-discount-for-woocommerce' ) .
+			'</a>';
 		}
+
 		return array_merge( $custom_links, $links );
 	}
 

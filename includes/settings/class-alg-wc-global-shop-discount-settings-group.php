@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Group Section Settings
  *
- * @version 2.0.0
+ * @version 2.2.2
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -31,7 +31,15 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	function __construct( $id ) {
 		$admin_titles   = get_option( 'alg_wc_global_shop_discount_admin_title', array() );
 		$this->id       = 'group_' . $id;
-		$this->desc     = ( isset( $admin_titles[ $id ] ) && '' !== $admin_titles[ $id ] ? $admin_titles[ $id ] : sprintf( __( 'Discount Group #%d', 'global-shop-discount-for-woocommerce' ), $id ) );
+		$this->desc     = (
+			isset( $admin_titles[ $id ] ) && '' !== $admin_titles[ $id ] ?
+			$admin_titles[ $id ] :
+			sprintf(
+				/* Translators: %d: Group ID. */
+				__( 'Discount Group #%d', 'global-shop-discount-for-woocommerce' ),
+				$id
+			)
+		);
 		$this->group_nr = $id;
 		parent::__construct();
 	}
@@ -78,7 +86,7 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 			$terms = get_terms( $args );
 		} else {
 			unset( $args['taxonomy'] );
-			$terms = get_terms( $taxonomy, $args );
+			$terms = get_terms( $taxonomy, $args ); // phpcs:ignore WordPress.WP.DeprecatedParameters.Get_termsParam2Found
 		}
 		$terms_options = array();
 		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
@@ -127,8 +135,15 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 		}
 		foreach ( $current_products as $product_id ) {
 			$product = wc_get_product( $product_id );
-			$product_options[ esc_attr( $product_id ) ] = ( is_object( $product ) ?
-				esc_html( wp_strip_all_tags( $product->get_formatted_name() ) ) : sprintf( esc_html__( 'Product #%d', 'global-shop-discount-for-woocommerce' ), $product_id ) );
+			$product_options[ esc_attr( $product_id ) ] = (
+				is_object( $product ) ?
+				esc_html( wp_strip_all_tags( $product->get_formatted_name() ) ) :
+				sprintf(
+					/* Translators: %d: Product ID. */
+					esc_html__( 'Product #%d', 'global-shop-discount-for-woocommerce' ),
+					$product_id
+				)
+			);
 		}
 		return $product_options;
 	}
@@ -154,30 +169,73 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	/**
 	 * get_date_format_and_examples_desc.
 	 *
-	 * @version 1.9.4
+	 * @version 2.2.2
 	 * @since   1.9.4
 	 */
 	function get_date_format_and_examples_desc() {
 		ob_start();
 		?><details class="alg-wc-global-shop-discount-details">
-			<summary><?php echo __( 'Accepted date format and examples', 'global-shop-discount-for-woocommerce' ); ?></summary>
-			<h4><?php echo __( 'Date format', 'global-shop-discount-for-woocommerce' ); ?></h4>
-			<p><?php printf( __( 'The option must be set as date range(s) in <code>from - to</code> format, i.e., dates must be separated by the hyphen <code>-</code> symbol, e.g.: %s', 'global-shop-discount-for-woocommerce' ),
-				'<pre>14.02.2021 15:00 - 26.02.2021 15:00</pre>' ); ?></p>
-			<p><?php echo __( 'You can add multiple date ranges separated by the semicolon <code>;</code> symbol, i.e., <code>from1 - to1; from2 - to2; ...</code>. The algorithm stops on the first matching date range.', 'global-shop-discount-for-woocommerce' ); ?></p>
-			<p><?php printf( __( 'Dates can be set in any format parsed by the PHP %s function. However, don\'t use the hyphen <code>-</code> symbol - it\'s reserved for separating <code>from</code> and <code>to</code> values.', 'global-shop-discount-for-woocommerce' ),
-				'<a href="https://www.php.net/manual/en/function.strtotime.php" target="_blank"><code>strtotime()</code></a>' ); ?></p>
-			<h4><?php echo __( 'Examples', 'global-shop-discount-for-woocommerce' ); ?></h4>
-			<p><?php printf( __( 'Enable discount on the exact dates: %s', 'global-shop-discount-for-woocommerce' ),
-				'<pre>14.02.2021 15:00 - 26.02.2021 15:00</pre>' ); ?></p>
-			<p><?php printf( __( 'Enable discount only before 3:00 PM each day: %s', 'global-shop-discount-for-woocommerce' ),
-				'<pre>00:00:00 - 14:59:59</pre>' ); ?></p>
-			<p><?php printf( __( 'Enable discount only before 3:00 PM each day, or before 5:00 PM on Mondays: %s', 'global-shop-discount-for-woocommerce' ),
-				'<pre>00:00:00 - 14:59:59; Monday 00:00:00 - Monday 16:59:59</pre>' ); ?></p>
-			<p><?php printf( __( 'Enable discount for the summer months only: %s', 'global-shop-discount-for-woocommerce' ),
-				'<pre>first day of June - last day of August 23:59:59</pre>' ); ?></p>
-			<p><?php printf( __( 'Enable discount for February only: %s', 'global-shop-discount-for-woocommerce' ),
-				'<pre>first day of February - last day of February 23:59:59</pre>' ); ?></p>
+			<summary><?php
+				esc_html_e( 'Accepted date format and examples', 'global-shop-discount-for-woocommerce' );
+			?></summary>
+			<h4><?php
+				esc_html_e( 'Date format', 'global-shop-discount-for-woocommerce' );
+			?></h4>
+			<p><?php
+				printf(
+					/* Translators: %s: Date example. */
+					wp_kses_post( __( 'The option must be set as date range(s) in <code>from - to</code> format, i.e., dates must be separated by the hyphen <code>-</code> symbol, e.g.: %s', 'global-shop-discount-for-woocommerce' ) ),
+					'<pre>14.02.2021 15:00 - 26.02.2021 15:00</pre>'
+				);
+			?></p>
+			<p><?php
+				echo wp_kses_post( __( 'You can add multiple date ranges separated by the semicolon <code>;</code> symbol, i.e., <code>from1 - to1; from2 - to2; ...</code>. The algorithm stops on the first matching date range.', 'global-shop-discount-for-woocommerce' ) );
+			?></p>
+			<p><?php
+				printf(
+					/* Translators: %s: Link. */
+					wp_kses_post( __( 'Dates can be set in any format parsed by the PHP %s function. However, don\'t use the hyphen <code>-</code> symbol - it\'s reserved for separating <code>from</code> and <code>to</code> values.', 'global-shop-discount-for-woocommerce' ) ),
+					'<a href="https://www.php.net/manual/en/function.strtotime.php" target="_blank"><code>strtotime()</code></a>'
+				);
+			?></p>
+			<h4><?php
+				esc_html_e( 'Examples', 'global-shop-discount-for-woocommerce' );
+			?></h4>
+			<p><?php
+				printf(
+					/* Translators: %s: Date example. */
+					esc_html__( 'Enable discount on the exact dates: %s', 'global-shop-discount-for-woocommerce' ),
+					'<pre>14.02.2021 15:00 - 26.02.2021 15:00</pre>'
+				);
+			?></p>
+			<p><?php
+				printf(
+					/* Translators: %s: Date example. */
+					esc_html__( 'Enable discount only before 3:00 PM each day: %s', 'global-shop-discount-for-woocommerce' ),
+					'<pre>00:00:00 - 14:59:59</pre>'
+				);
+			?></p>
+			<p><?php
+				printf(
+					/* Translators: %s: Date example. */
+					esc_html__( 'Enable discount only before 3:00 PM each day, or before 5:00 PM on Mondays: %s', 'global-shop-discount-for-woocommerce' ),
+					'<pre>00:00:00 - 14:59:59; Monday 00:00:00 - Monday 16:59:59</pre>'
+				);
+			?></p>
+			<p><?php
+				printf(
+					/* Translators: %s: Date example. */
+					esc_html__( 'Enable discount for the summer months only: %s', 'global-shop-discount-for-woocommerce' ),
+					'<pre>first day of June - last day of August 23:59:59</pre>'
+				);
+			?></p>
+			<p><?php
+				printf(
+					/* Translators: %s: Date example. */
+					esc_html__( 'Enable discount for February only: %s', 'global-shop-discount-for-woocommerce' ),
+					'<pre>first day of February - last day of February 23:59:59</pre>'
+				);
+			?></p>
 		</details><?php
 		return ob_get_clean();
 	}
@@ -204,73 +262,103 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 		add_action( 'admin_footer', array( $this, 'style' ) );
 
 		// Get users
-		$users = wp_list_pluck( get_users( array( 'fields' => array( 'ID', 'user_nicename' ) ) ), 'user_nicename', 'ID' );
+		$users = wp_list_pluck(
+			get_users( array( 'fields' => array( 'ID', 'user_nicename' ) ) ),
+			'user_nicename',
+			'ID'
+		);
 
 		// Get user roles
 		global $wp_roles;
-		$user_roles = wp_list_pluck( apply_filters( 'editable_roles', $wp_roles->roles ), 'name' );
+		$user_roles = wp_list_pluck(
+			apply_filters( 'editable_roles', $wp_roles->roles ),
+			'name'
+		);
 
 		// Get taxonomies
-		$all_taxonomies = array_combine( get_object_taxonomies( 'product', 'names' ), wp_list_pluck( get_object_taxonomies( 'product', 'objects' ), 'label' ) );
-		$taxonomies     = get_option( 'alg_wc_global_shop_discount_taxonomies', array( 'product_cat', 'product_tag' ) );
+		$all_taxonomies = array_combine(
+			get_object_taxonomies( 'product', 'names' ),
+			wp_list_pluck( get_object_taxonomies( 'product', 'objects' ), 'label' )
+		);
+		$taxonomies     = get_option(
+			'alg_wc_global_shop_discount_taxonomies',
+			array( 'product_cat', 'product_tag' )
+		);
 
 		// Maybe convert and update option value
-		$this->maybe_convert_and_update_option_value( array( 'alg_wc_global_shop_discount_products_incl', 'alg_wc_global_shop_discount_products_excl' ) );
-		$this->maybe_convert_and_update_option_value( array( 'alg_wc_global_shop_discount_users_incl', 'alg_wc_global_shop_discount_users_excl' ) );
+		$this->maybe_convert_and_update_option_value( array(
+			'alg_wc_global_shop_discount_products_incl',
+			'alg_wc_global_shop_discount_products_excl',
+		) );
+		$this->maybe_convert_and_update_option_value( array(
+			'alg_wc_global_shop_discount_users_incl',
+			'alg_wc_global_shop_discount_users_excl',
+		) );
 		foreach ( $taxonomies as $taxonomy ) {
 			$id = alg_wc_global_shop_discount()->core->get_taxonomy_option_id( $taxonomy );
-			$this->maybe_convert_and_update_option_value( array( "alg_wc_global_shop_discount_{$id}_incl", "alg_wc_global_shop_discount_{$id}_excl" ) );
+			$this->maybe_convert_and_update_option_value( array(
+				"alg_wc_global_shop_discount_{$id}_incl",
+				"alg_wc_global_shop_discount_{$id}_excl",
+			) );
 		}
 
 		// General
 		$settings = array(
 			array(
-				'title'    => $this->desc,
-				'type'     => 'title',
-				'id'       => "alg_wc_global_shop_discount_general_options_{$i}",
+				'title'             => $this->desc,
+				'type'              => 'title',
+				'id'                => "alg_wc_global_shop_discount_general_options_{$i}",
 			),
 			array(
-				'title'    => __( 'Enabled', 'global-shop-discount-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Enabled/disables discount group #%d.', 'global-shop-discount-for-woocommerce' ), $i ),
-				'desc'     => '<strong>' . __( 'Enable', 'global-shop-discount-for-woocommerce' ) . '</strong>',
-				'id'       => "alg_wc_global_shop_discount_enabled[{$i}]",
-				'default'  => 'yes',
-				'type'     => 'checkbox',
+				'title'             => __( 'Enabled', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip'          => sprintf(
+					/* Translators: %d: Group ID. */
+					__( 'Enabled/disables discount group #%d.', 'global-shop-discount-for-woocommerce' ),
+					$i
+				),
+				'desc'              => '<strong>' . __( 'Enable', 'global-shop-discount-for-woocommerce' ) . '</strong>',
+				'id'                => "alg_wc_global_shop_discount_enabled[{$i}]",
+				'default'           => 'yes',
+				'type'              => 'checkbox',
 			),
 			array(
-				'title'    => __( 'Admin title (optional)', 'global-shop-discount-for-woocommerce' ),
-				'desc_tip' => __( 'Visible only to admin.', 'global-shop-discount-for-woocommerce' ),
-				'id'       => "alg_wc_global_shop_discount_admin_title[{$i}]",
-				'default'  => sprintf( __( 'Discount Group #%d', 'global-shop-discount-for-woocommerce' ), $i ),
-				'type'     => 'text',
+				'title'             => __( 'Admin title (optional)', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip'          => __( 'Visible only to admin.', 'global-shop-discount-for-woocommerce' ),
+				'id'                => "alg_wc_global_shop_discount_admin_title[{$i}]",
+				'default'           => sprintf(
+					/* Translators: %d: Group ID. */
+					__( 'Discount Group #%d', 'global-shop-discount-for-woocommerce' ),
+					$i
+				),
+				'type'              => 'text',
 			),
 			array(
-				'title'    => __( 'Type', 'global-shop-discount-for-woocommerce' ),
-				'desc_tip' => __( 'Can be fixed or percent.', 'global-shop-discount-for-woocommerce' ),
-				'id'       => "alg_wc_global_shop_discount_coefficient_type[{$i}]",
-				'default'  => 'percent',
-				'type'     => 'select',
-				'class'    => 'chosen_select',
-				'options'  => array(
+				'title'             => __( 'Type', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip'          => __( 'Can be fixed or percent.', 'global-shop-discount-for-woocommerce' ),
+				'id'                => "alg_wc_global_shop_discount_coefficient_type[{$i}]",
+				'default'           => 'percent',
+				'type'              => 'select',
+				'class'             => 'chosen_select',
+				'options'           => array(
 					'percent' => __( 'Percent', 'global-shop-discount-for-woocommerce' ),
 					'fixed'   => __( 'Fixed', 'global-shop-discount-for-woocommerce' ),
 				),
 			),
 			array(
-				'title'    => __( 'Value', 'global-shop-discount-for-woocommerce' ),
-				'desc_tip' => __( 'Must be negative number.', 'global-shop-discount-for-woocommerce' ),
-				'id'       => "alg_wc_global_shop_discount_coefficient[{$i}]",
-				'default'  => 0,
-				'type'     => 'number',
+				'title'             => __( 'Value', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip'          => __( 'Must be negative number.', 'global-shop-discount-for-woocommerce' ),
+				'id'                => "alg_wc_global_shop_discount_coefficient[{$i}]",
+				'default'           => 0,
+				'type'              => 'number',
 				'custom_attributes' => array( 'max' => 0, 'step' => 0.0001 ),
 			),
 			array(
-				'title'    => __( 'Rounding', 'global-shop-discount-for-woocommerce' ),
-				'id'       => "alg_wc_global_shop_discount_round_func[{$i}]",
-				'default'  => '',
-				'type'     => 'select',
-				'class'    => 'chosen_select',
-				'options'  => array(
+				'title'             => __( 'Rounding', 'global-shop-discount-for-woocommerce' ),
+				'id'                => "alg_wc_global_shop_discount_round_func[{$i}]",
+				'default'           => '',
+				'type'              => 'select',
+				'class'             => 'chosen_select',
+				'options'           => array(
 					''      => __( 'No rounding', 'global-shop-discount-for-woocommerce' ),
 					'round' => __( 'Round', 'global-shop-discount-for-woocommerce' ),
 					'ceil'  => __( 'Round up', 'global-shop-discount-for-woocommerce' ),
@@ -278,70 +366,76 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 				),
 			),
 			array(
-				'title'    => __( 'Date(s)', 'global-shop-discount-for-woocommerce' ),
-				'desc'     => $this->get_date_format_and_examples_desc(),
-				'desc_tip' => __( 'Set active date(s) for the current discount group.', 'global-shop-discount-for-woocommerce' ) . ' ' .
+				'title'             => __( 'Date(s)', 'global-shop-discount-for-woocommerce' ),
+				'desc'              => $this->get_date_format_and_examples_desc(),
+				'desc_tip'          => (
+					__( 'Set active date(s) for the current discount group.', 'global-shop-discount-for-woocommerce' ) . ' ' .
 					__( 'Ignored if empty.', 'global-shop-discount-for-woocommerce' ) . '<br><br>' .
-					sprintf( __( 'Current date: %s', 'global-shop-discount-for-woocommerce' ), '<br>' . date( 'd.m.Y H:i:s', current_time( 'timestamp' ) ) ),
-				'id'       => "alg_wc_global_shop_discount_dates_incl[{$i}]",
-				'default'  => '',
-				'type'     => 'text',
+					sprintf(
+						/* Translators: %s: Date. */
+						__( 'Current date: %s', 'global-shop-discount-for-woocommerce' ),
+						'<br>' . date( 'd.m.Y H:i:s', current_time( 'timestamp' ) ) // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
+					)
+				),
+				'id'                => "alg_wc_global_shop_discount_dates_incl[{$i}]",
+				'default'           => '',
+				'type'              => 'text',
 			),
 			array(
-				'title'    => __( 'Product scope', 'global-shop-discount-for-woocommerce' ),
-				'desc_tip' => __( 'Possible values: all products, only products that are already on sale, only products that are not on sale.', 'global-shop-discount-for-woocommerce' ),
-				'id'       => "alg_wc_global_shop_discount_product_scope[{$i}]",
-				'default'  => 'all',
-				'type'     => 'select',
-				'class'    => 'chosen_select',
-				'options'  => array(
+				'title'             => __( 'Product scope', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip'          => __( 'Possible values: all products, only products that are already on sale, only products that are not on sale.', 'global-shop-discount-for-woocommerce' ),
+				'id'                => "alg_wc_global_shop_discount_product_scope[{$i}]",
+				'default'           => 'all',
+				'type'              => 'select',
+				'class'             => 'chosen_select',
+				'options'           => array(
 					'all'              => __( 'All products', 'global-shop-discount-for-woocommerce' ),
 					'only_on_sale'     => __( 'Only products that are already on sale', 'global-shop-discount-for-woocommerce' ),
 					'only_not_on_sale' => __( 'Only products that are not on sale', 'global-shop-discount-for-woocommerce' ),
 				),
 			),
 			array(
-				'type'     => 'sectionend',
-				'id'       => "alg_wc_global_shop_discount_general_options_{$i}",
+				'type'              => 'sectionend',
+				'id'                => "alg_wc_global_shop_discount_general_options_{$i}",
 			),
 		);
 
 		// Products
 		$settings = array_merge( $settings, array(
 			array(
-				'title'    => __( 'Products', 'global-shop-discount-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => "alg_wc_global_shop_discount_products_options_{$i}",
+				'title'             => __( 'Products', 'global-shop-discount-for-woocommerce' ),
+				'type'              => 'title',
+				'id'                => "alg_wc_global_shop_discount_products_options_{$i}",
 			),
 			array(
-				'title'    => __( 'Include', 'global-shop-discount-for-woocommerce' ),
-				'desc_tip' => __( 'Set this field to apply discount to selected products only. Leave blank to apply to all products.', 'global-shop-discount-for-woocommerce' ),
-				'id'       => "alg_wc_global_shop_discount_products_incl[{$i}]",
-				'default'  => array(),
-				'type'     => 'multiselect',
-				'class'    => 'wc-product-search',
-				'options'  => $this->get_product_options( 'alg_wc_global_shop_discount_products_incl', $i ),
+				'title'             => __( 'Include', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip'          => __( 'Set this field to apply discount to selected products only. Leave blank to apply to all products.', 'global-shop-discount-for-woocommerce' ),
+				'id'                => "alg_wc_global_shop_discount_products_incl[{$i}]",
+				'default'           => array(),
+				'type'              => 'multiselect',
+				'class'             => 'wc-product-search',
+				'options'           => $this->get_product_options( 'alg_wc_global_shop_discount_products_incl', $i ),
 				'custom_attributes' => array(
-					'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ),
+					'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 					'data-action'      => 'woocommerce_json_search_products_and_variations',
 				),
 			),
 			array(
-				'title'    => __( 'Exclude', 'global-shop-discount-for-woocommerce' ),
-				'desc_tip' => __( 'Set this field to NOT apply discount to selected products. Leave blank to apply to all products.', 'global-shop-discount-for-woocommerce' ),
-				'id'       => "alg_wc_global_shop_discount_products_excl[{$i}]",
-				'default'  => array(),
-				'type'     => 'multiselect',
-				'class'    => 'wc-product-search',
-				'options'  => $this->get_product_options( 'alg_wc_global_shop_discount_products_excl', $i ),
+				'title'             => __( 'Exclude', 'global-shop-discount-for-woocommerce' ),
+				'desc_tip'          => __( 'Set this field to NOT apply discount to selected products. Leave blank to apply to all products.', 'global-shop-discount-for-woocommerce' ),
+				'id'                => "alg_wc_global_shop_discount_products_excl[{$i}]",
+				'default'           => array(),
+				'type'              => 'multiselect',
+				'class'             => 'wc-product-search',
+				'options'           => $this->get_product_options( 'alg_wc_global_shop_discount_products_excl', $i ),
 				'custom_attributes' => array(
-					'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ),
+					'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 					'data-action'      => 'woocommerce_json_search_products_and_variations',
 				),
 			),
 			array(
-				'type'     => 'sectionend',
-				'id'       => "alg_wc_global_shop_discount_products_options_{$i}",
+				'type'              => 'sectionend',
+				'id'                => "alg_wc_global_shop_discount_products_options_{$i}",
 			),
 		) );
 
