@@ -71,9 +71,20 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 				'default'           => 1,
 				'type'              => 'number',
 				'desc_tip'          => __( 'Click "Save changes" after you change this number, and new settings sections will be displayed.', 'global-shop-discount-for-woocommerce' ),
-				'desc'              => apply_filters( 'alg_wc_global_shop_discount_settings', sprintf( 'You will need %s plugin to add more than one discount group.',
-					'<a target="_blank" href="https://wpfactory.com/item/global-shop-discount-for-woocommerce/">' . 'Sitewide Discount for WooCommerce: Apply Discount to All Products Pro' . '</a>' ) ),
-				'custom_attributes' => apply_filters( 'alg_wc_global_shop_discount_settings', array( 'readonly' => 'readonly' ), 'array' ),
+				'desc'              => apply_filters(
+					'alg_wc_global_shop_discount_settings',
+					sprintf(
+						'You will need %s plugin to add more than one discount group.',
+						'<a target="_blank" href="https://wpfactory.com/item/global-shop-discount-for-woocommerce/">' .
+							'Sitewide Discount for WooCommerce: Apply Discount to All Products Pro' .
+						'</a>'
+					)
+				),
+				'custom_attributes' => apply_filters(
+					'alg_wc_global_shop_discount_settings',
+					array( 'readonly' => 'readonly' ),
+					'array'
+				),
 			),
 			array(
 				'type'              => 'sectionend',
@@ -110,7 +121,10 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 				'default'  => array( 'product_cat', 'product_tag' ),
 				'type'     => 'multiselect',
 				'class'    => 'chosen_select',
-				'options'  => array_combine( get_object_taxonomies( 'product', 'names' ), wp_list_pluck( get_object_taxonomies( 'product', 'objects' ), 'label' ) ),
+				'options'  => array_combine(
+					get_object_taxonomies( 'product', 'names' ),
+					wp_list_pluck( get_object_taxonomies( 'product', 'objects' ), 'label' )
+				),
 			),
 			array(
 				'desc'     => __( 'Taxonomies sorting in admin settings', 'global-shop-discount-for-woocommerce' ),
@@ -138,7 +152,11 @@ class Alg_WC_Global_Shop_Discount_Settings_General extends Alg_WC_Global_Shop_Di
 			),
 		);
 
-		return array_merge( $plugin_settings, $general_settings, $advanced_settings );
+		return array_merge(
+			$plugin_settings,
+			$general_settings,
+			$advanced_settings
+		);
 	}
 
 }

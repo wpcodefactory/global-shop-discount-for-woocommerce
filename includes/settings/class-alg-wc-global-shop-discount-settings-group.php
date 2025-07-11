@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Group Section Settings
  *
- * @version 2.2.2
+ * @version 2.2.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -91,8 +91,20 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 		$terms_options = array();
 		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 			foreach ( $terms as $term ) {
-				$term_parents_list = ( empty( $term->parent ) ? '' :
-					' (' . trim( get_term_parents_list( $term->term_id, $taxonomy, array( 'link' => false, 'inclusive' => false, 'separator' => ' > ' ) ), ' > ' ) . ')' );
+				$term_parents_list = (
+					empty( $term->parent ) ?
+					'' :
+					' (' .
+						trim(
+							get_term_parents_list(
+								$term->term_id,
+								$taxonomy,
+								array( 'link' => false, 'inclusive' => false, 'separator' => ' > ' )
+							),
+							' > '
+						) .
+					')'
+				);
 				$terms_options[ $term->term_id ] = $term->name . $term_parents_list;
 			}
 		}
@@ -110,7 +122,10 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	function maybe_add_current_values( $values, $option_id, $title = false ) {
 		if ( is_array( $values ) ) {
 			$current_values = get_option( $option_id, array() );
-			if ( ! empty( $current_values[ $this->group_nr ] ) && is_array( $current_values[ $this->group_nr ] ) ) {
+			if (
+				! empty( $current_values[ $this->group_nr ] ) &&
+				is_array( $current_values[ $this->group_nr ] )
+			) {
 				$_current_values = array();
 				foreach ( $current_values[ $this->group_nr ] as $value ) {
 					$_current_values[ $value ] = ( $title ? $title . ' #' . $value : $value );
@@ -124,14 +139,14 @@ class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Disc
 	/**
 	 * get_product_options.
 	 *
-	 * @version 1.5.0
+	 * @version 2.2.3
 	 * @since   1.5.0
 	 */
 	function get_product_options( $option, $key = false ) {
 		$product_options  = array();
 		$current_products = get_option( $option, array() );
 		if ( false !== $key ) {
-			$current_products = ( isset( $current_products[ $key ] ) ? $current_products[ $key ] : array() );
+			$current_products = ( $current_products[ $key ] ?? array() );
 		}
 		foreach ( $current_products as $product_id ) {
 			$product = wc_get_product( $product_id );

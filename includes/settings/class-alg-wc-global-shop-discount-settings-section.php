@@ -37,8 +37,15 @@ class Alg_WC_Global_Shop_Discount_Settings_Section {
 	 * @since   1.0.0
 	 */
 	function __construct() {
-		add_filter( 'woocommerce_get_sections_alg_wc_global_shop_discount',              array( $this, 'settings_section' ) );
-		add_filter( 'woocommerce_get_settings_alg_wc_global_shop_discount_' . $this->id, array( $this, 'get_settings' ), PHP_INT_MAX );
+		add_filter(
+			'woocommerce_get_sections_alg_wc_global_shop_discount',
+			array( $this, 'settings_section' )
+		);
+		add_filter(
+			'woocommerce_get_settings_alg_wc_global_shop_discount_' . $this->id,
+			array( $this, 'get_settings' ),
+			PHP_INT_MAX
+		);
 	}
 
 	/**

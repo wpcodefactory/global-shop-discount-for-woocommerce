@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Main Class
  *
- * @version 2.2.2
+ * @version 2.2.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -115,7 +115,7 @@ final class Alg_WC_Global_Shop_Discount {
 	 * @version 1.9.1
 	 * @since   1.9.1
 	 *
-	 * @see     https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
+	 * @see     https://developer.woocommerce.com/docs/features/high-performance-order-storage/recipe-book/
 	 */
 	function wc_declare_compatibility() {
 		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
@@ -159,7 +159,10 @@ final class Alg_WC_Global_Shop_Discount {
 	function admin() {
 
 		// Action links
-		add_filter( 'plugin_action_links_' . plugin_basename( ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE ), array( $this, 'action_links' ) );
+		add_filter(
+			'plugin_action_links_' . plugin_basename( ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE ),
+			array( $this, 'action_links' )
+		);
 
 		// "Recommendations" page
 		add_action( 'init', array( $this, 'add_cross_selling_library' ) );
@@ -198,7 +201,7 @@ final class Alg_WC_Global_Shop_Discount {
 	/**
 	 * move_wc_settings_tab_to_wpfactory_menu.
 	 *
-	 * @version 2.2.0
+	 * @version 2.2.3
 	 * @since   2.2.0
 	 */
 	function move_wc_settings_tab_to_wpfactory_menu() {
@@ -216,7 +219,11 @@ final class Alg_WC_Global_Shop_Discount {
 		$wpfactory_admin_menu->move_wc_settings_tab_to_wpfactory_menu( array(
 			'wc_settings_tab_id' => 'alg_wc_global_shop_discount',
 			'menu_title'         => __( 'Global Shop Discount', 'global-shop-discount-for-woocommerce' ),
-			'page_title'         => __( 'Global Shop Discount', 'global-shop-discount-for-woocommerce' ),
+			'page_title'         => __( 'Sitewide Discount for WooCommerce: Apply Discount to All Products', 'global-shop-discount-for-woocommerce' ),
+			'plugin_icon'        => array(
+				'get_url_method'    => 'wporg_plugins_api',
+				'wporg_plugin_slug' => 'global-shop-discount-for-woocommerce',
+			),
 		) );
 
 	}
@@ -238,7 +245,11 @@ final class Alg_WC_Global_Shop_Discount {
 		'</a>';
 
 		if ( 'global-shop-discount-for-woocommerce.php' === basename( ALG_WC_GLOBAL_SHOP_DISCOUNT_FILE ) ) {
-			$custom_links[] = '<a target="_blank" style="font-weight: bold; color: green;" href="https://wpfactory.com/item/global-shop-discount-for-woocommerce/">' .
+			$custom_links[] = '<a' .
+				' target="_blank"' .
+				' style="font-weight: bold; color: green;"' .
+				' href="https://wpfactory.com/item/global-shop-discount-for-woocommerce/"' .
+			'>' .
 				__( 'Go Pro', 'global-shop-discount-for-woocommerce' ) .
 			'</a>';
 		}

@@ -38,7 +38,10 @@ class Alg_WC_Global_Shop_Discount_Shortcodes {
 	function products_shortcode( $atts ) {
 
 		$product_ids_on_sale = false;
-		$do_use_transient    = ( isset( $atts['use_transient'] ) && filter_var( $atts['use_transient'], FILTER_VALIDATE_BOOLEAN ) );
+		$do_use_transient    = (
+			isset( $atts['use_transient'] ) &&
+			filter_var( $atts['use_transient'], FILTER_VALIDATE_BOOLEAN )
+		);
 
 		// Try cache
 		if ( $do_use_transient ) {
