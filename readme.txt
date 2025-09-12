@@ -1,9 +1,9 @@
 === Sitewide Discount for WooCommerce: Apply Discount to All Products ===
-Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas
+Contributors: wpcodefactory, anbinder, karzin, omardabbas
 Tags: woocommerce, discount, global shop discount, ecommerce
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,6 +46,9 @@ Add global shop discount to all WooCommerce products. Beautifully.
 1. Discount settings.
 
 == Changelog ==
+
+= 2.2.4 - 12/09/2025 =
+* WC tested up to: 10.1.
 
 = 2.2.3 - 11/07/2025 =
 * Dev - WPFactory Admin Menu - Library updated.
