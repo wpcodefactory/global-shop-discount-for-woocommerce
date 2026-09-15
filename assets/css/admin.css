@@ -1,0 +1,17 @@
+/**
+ * Global Shop Discount for WooCommerce - Admin CSS
+ *
+ * @version 2.3.0
+ * @since   2.3.0
+ *
+ * @author WPFactory
+ */
+
+.alg-wc-global-shop-discount-details summary {
+	cursor: pointer;
+}
+
+.alg-wc-global-shop-discount-details pre {
+	background: rgba(0, 0, 0, 0.07);
+	padding: 10px;
+}

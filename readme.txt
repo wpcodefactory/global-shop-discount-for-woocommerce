@@ -1,9 +1,9 @@
 === Sitewide Discount for WooCommerce: Apply Discount to All Products ===
 Contributors: wpcodefactory, anbinder, karzin, omardabbas
 Tags: woocommerce, discount, global shop discount, ecommerce
-Requires at least: 4.4
-Tested up to: 7.0
-Stable tag: 2.2.5
+Requires at least: 4.8
+Tested up to: 7.1
+Stable tag: 2.3.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,9 +47,21 @@ Add global shop discount to all WooCommerce products. Beautifully.
 
 == Changelog ==
 
+= 2.3.0 - 15/09/2026 =
+* Dev - The free plugin version now can handle multiple discount groups.
+* Dev - Style moved to a separate CSS file.
+* Dev - Code refactoring.
+* Dev - Coding standards improved.
+* Dev - WPFactory Admin Menu - Library updated (to v1.1.2).
+* Dev - WPFactory Cross-Selling - Library updated (to v1.1.5).
+* Dev - WPFactory Key Manager - Library updated (to v1.1.1).
+* Tested up to: 7.1.
+* WC tested up to: 11.1.
+* Requires at least: 4.8.
+
 = 2.2.5 - 23/05/2026 =
-* Tested up to: 7.0.
 * WC tested up to: 10.7.
+* Tested up to: 7.0.
 
 = 2.2.4 - 12/09/2025 =
 * WC tested up to: 10.1.
@@ -182,8 +194,8 @@ Add global shop discount to all WooCommerce products. Beautifully.
 * Dev - Discount Groups - Admin settings restyled.
 * Dev - Plugin is initialized on the `plugins_loaded` action now.
 * Dev - Code refactoring.
-* Tested up to: 5.8.
 * WC tested up to: 5.6.
+* Tested up to: 5.8.
 
 = 1.3.0 - 25/02/2021 =
 * Dev - Discount Groups - "Date(s)" options added.
@@ -199,8 +211,8 @@ Add global shop discount to all WooCommerce products. Beautifully.
 * Dev - Localization - `load_plugin_textdomain()` moved to the `init` action.
 * Dev - Admin settings descriptions updated.
 * Dev - Code refactoring.
-* Tested up to: 5.6.
 * WC tested up to: 4.9.
+* Tested up to: 5.6.
 
 = 1.1.0 - 11/11/2019 =
 * Dev - Admin settings restyled.

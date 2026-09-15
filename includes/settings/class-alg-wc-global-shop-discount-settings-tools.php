@@ -5,82 +5,92 @@
  * @version 2.0.0
  * @since   1.9.0
  *
- * @author  Algoritmika Ltd.
+ * @author WPFactory
+ *
+ * @package WPFactory\WC_Global_Shop_Discount\Settings
  */
 
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Settings_Tools' ) ) :
 
-class Alg_WC_Global_Shop_Discount_Settings_Tools extends Alg_WC_Global_Shop_Discount_Settings_Section {
-
 	/**
-	 * Constructor.
-	 *
-	 * @version 1.9.0
-	 * @since   1.9.0
-	 */
-	function __construct() {
-		$this->id   = 'tools';
-		$this->desc = __( 'Tools', 'global-shop-discount-for-woocommerce' );
-		parent::__construct();
-	}
-
-	/**
-	 * get_settings.
+	 * Alg_WC_Global_Shop_Discount_Settings_Tools class.
 	 *
 	 * @version 2.0.0
 	 * @since   1.9.0
 	 */
-	function get_settings() {
-		$icon = '<span class="dashicons dashicons-admin-generic"></span>';
-		return array(
-			array(
-				'title'    => __( 'Tools', 'global-shop-discount-for-woocommerce' ),
-				'desc'     => (
-					sprintf(
-						/* Translators: %s: Icon. */
-						__( 'Check the %s box and "Save changes" to run the tool.', 'global-shop-discount-for-woocommerce' ),
-						$icon
-					) . ' ' .
-					'<strong>' .
-						__( 'Please note that there is no undo option.', 'global-shop-discount-for-woocommerce' ) .
-					'</strong>'
-				),
-				'type'     => 'title',
-				'id'       => 'alg_wc_global_shop_discount_tools',
-			),
-			array(
-				'title'    => __( 'Delete transients', 'global-shop-discount-for-woocommerce' ),
-				'desc_tip' => sprintf(
-					/* Translators: %s: Shortcode name. */
-					__( 'The tool will delete the plugin\'s transients, e.g., for the %s shortcode.', 'global-shop-discount-for-woocommerce' ),
-					'<code>[alg_wc_gsd_products]</code>'
-				),
-				'desc'     => $icon . ' ' . __( 'Delete', 'global-shop-discount-for-woocommerce' ),
-				'id'       => 'alg_wc_global_shop_discount_tool_delete_transients',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'Save prices in DB for all products', 'global-shop-discount-for-woocommerce' ),
-				'desc_tip' => (
-					__( 'The tool will apply and save plugin\'s prices for all products in DB.', 'global-shop-discount-for-woocommerce' ) . ' ' .
-					__( 'You\'ll probably want to disable all plugin\'s discounts after running this tool.', 'global-shop-discount-for-woocommerce' )
-				),
-				'desc'     => $icon . ' ' . __( 'Save', 'global-shop-discount-for-woocommerce' ),
-				'id'       => 'alg_wc_global_shop_discount_tool_save_all_products',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_global_shop_discount_tools',
-			),
-		);
-	}
+	class Alg_WC_Global_Shop_Discount_Settings_Tools extends Alg_WC_Global_Shop_Discount_Settings_Section {
 
-}
+		/**
+		 * Constructor.
+		 *
+		 * @version 1.9.0
+		 * @since   1.9.0
+		 */
+		public function __construct() {
+			$this->id   = 'tools';
+			$this->desc = __( 'Tools', 'global-shop-discount-for-woocommerce' );
+			parent::__construct();
+		}
+
+		/**
+		 * Get settings.
+		 *
+		 * @version 2.0.0
+		 * @since   1.9.0
+		 *
+		 * @return array Array of settings.
+		 */
+		public function get_settings() {
+			$icon = '<span class="dashicons dashicons-admin-generic"></span>';
+
+			return array(
+				array(
+					'title' => __( 'Tools', 'global-shop-discount-for-woocommerce' ),
+					'desc'  => (
+						sprintf(
+							/* Translators: %s: Icon. */
+							__( 'Check the %s box and "Save changes" to run the tool.', 'global-shop-discount-for-woocommerce' ),
+							$icon
+						) . ' ' .
+						'<strong>' .
+							__( 'Please note that there is no undo option.', 'global-shop-discount-for-woocommerce' ) .
+						'</strong>'
+					),
+					'type'  => 'title',
+					'id'    => 'alg_wc_global_shop_discount_tools',
+				),
+				array(
+					'title'    => __( 'Delete transients', 'global-shop-discount-for-woocommerce' ),
+					'desc_tip' => sprintf(
+						/* Translators: %s: Shortcode name. */
+						__( 'The tool will delete the plugin\'s transients, e.g., for the %s shortcode.', 'global-shop-discount-for-woocommerce' ),
+						'<code>[alg_wc_gsd_products]</code>'
+					),
+					'desc'     => $icon . ' ' . __( 'Delete', 'global-shop-discount-for-woocommerce' ),
+					'id'       => 'alg_wc_global_shop_discount_tool_delete_transients',
+					'default'  => 'no',
+					'type'     => 'checkbox',
+				),
+				array(
+					'title'    => __( 'Save prices in DB for all products', 'global-shop-discount-for-woocommerce' ),
+					'desc_tip' => (
+						__( 'The tool will apply and save plugin\'s prices for all products in DB.', 'global-shop-discount-for-woocommerce' ) . ' ' .
+						__( 'You\'ll probably want to disable all plugin\'s discounts after running this tool.', 'global-shop-discount-for-woocommerce' )
+					),
+					'desc'     => $icon . ' ' . __( 'Save', 'global-shop-discount-for-woocommerce' ),
+					'id'       => 'alg_wc_global_shop_discount_tool_save_all_products',
+					'default'  => 'no',
+					'type'     => 'checkbox',
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_global_shop_discount_tools',
+				),
+			);
+		}
+	}
 
 endif;
 
