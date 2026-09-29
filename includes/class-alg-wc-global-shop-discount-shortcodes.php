@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Shortcodes Class
  *
- * @version 2.3.1
+ * @version 2.3.2
  * @since   1.7.0
  *
  * @author WPFactory
@@ -17,7 +17,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Shortcodes' ) ) :
 	/**
 	 * Alg_WC_Global_Shop_Discount_Shortcodes class.
 	 *
-	 * @version 2.3.1
+	 * @version 2.3.2
 	 * @since   1.7.0
 	 */
 	class Alg_WC_Global_Shop_Discount_Shortcodes {
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Shortcodes' ) ) :
 		/**
 		 * `[alg_wc_gsd_products]` shortcode.
 		 *
-		 * @version 2.3.1
+		 * @version 2.3.2
 		 * @since   1.5.1
 		 *
 		 * @param array $atts Shortcode attributes.
@@ -114,7 +114,11 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Shortcodes' ) ) :
 					' ',
 					array_map(
 						function ( $v, $k ) {
-							return sprintf( '%s="%s"', $k, $v );
+							return sprintf(
+								'%s="%s"',
+								sanitize_key( $k ),
+								esc_attr( $v )
+							);
 						},
 						$atts,
 						array_keys( $atts )
