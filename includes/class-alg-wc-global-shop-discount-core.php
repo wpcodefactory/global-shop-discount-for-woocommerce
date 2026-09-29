@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Core Class
  *
- * @version 2.3.0
+ * @version 2.3.1
  * @since   1.0.0
  *
  * @author WPFactory
@@ -17,7 +17,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 	/**
 	 * Alg_WC_Global_Shop_Discount_Core class.
 	 *
-	 * @version 2.3.0
+	 * @version 2.3.1
 	 * @since   1.0.0
 	 */
 	class Alg_WC_Global_Shop_Discount_Core {
@@ -125,7 +125,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.2.0
+		 * @version 2.3.1
 		 * @since   1.0.0
 		 *
 		 * @todo (feature) Fee instead of discount.
@@ -142,7 +142,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 				) {
 					$this->init();
 
-					$this->price_hooks( PHP_INT_MAX, false );
+					$this->price_hooks( PHP_INT_MAX );
 
 					$this->shortcodes = require_once plugin_dir_path( __FILE__ ) . 'class-alg-wc-global-shop-discount-shortcodes.php';
 				}
@@ -190,7 +190,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 		/**
 		 * Get product price raw.
 		 *
-		 * @version 1.9.0
+		 * @version 2.3.1
 		 * @since   1.9.0
 		 *
 		 * @param WC_Product $product The product object.
@@ -199,7 +199,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 		 * @return float The raw product price.
 		 */
 		public function get_product_price_raw( $product, $type = '' ) {
-			$this->price_hooks( PHP_INT_MAX, false, 'remove_filter' );
+			$this->price_hooks( PHP_INT_MAX, 'remove_filter' );
 
 			switch ( $type ) {
 				case 'sale':
@@ -214,7 +214,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 					$price = $product->get_price();
 			}
 
-			$this->price_hooks( PHP_INT_MAX, false );
+			$this->price_hooks( PHP_INT_MAX );
 
 			return $price;
 		}
@@ -346,16 +346,25 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 		/**
 		 * Add price hooks.
 		 *
-		 * @version 2.3.0
+		 * @version 2.3.1
 		 * @since   1.0.0
 		 *
-		 * @param int    $priority         The priority for the hooks.
-		 * @param bool   $include_shipping Whether to include shipping hooks.
-		 * @param string $action_func      The function to use for adding the hooks (e.g., 'add_filter' or 'add_action').
+		 * @param int    $priority    The priority for the hooks.
+		 * @param string $action_func The function to use for adding the hooks (e.g., 'add_filter' or 'remove_filter').
 		 *
-		 * @todo (feature) Global *shipping* discount.
+		 * @todo (feature) Global *shipping* discount (`woocommerce_package_rates`?).
 		 */
-		public function price_hooks( $priority, $include_shipping = true, $action_func = 'add_filter' ) {
+		public function price_hooks( $priority, $action_func = 'add_filter' ) {
+			if (
+				! in_array(
+					$action_func,
+					array( 'add_filter', 'remove_filter' ),
+					true
+				)
+			) {
+				return;
+			}
+
 			// Prices.
 			$action_func( $this->product_get_price_filter, array( $this, 'change_price' ), $priority, 2 );
 			$action_func( $this->product_get_sale_price_filter, array( $this, 'change_price' ), $priority, 2 );
@@ -370,11 +379,6 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 				$action_func( 'woocommerce_product_variation_get_price', array( $this, 'change_price' ), $priority, 2 );
 				$action_func( 'woocommerce_product_variation_get_regular_price', array( $this, 'change_price' ), $priority, 2 );
 				$action_func( 'woocommerce_product_variation_get_sale_price', array( $this, 'change_price' ), $priority, 2 );
-			}
-
-			// Shipping.
-			if ( $include_shipping ) {
-				$action_func( 'woocommerce_package_rates', array( $this, 'change_price_shipping' ), $priority, 2 );
 			}
 
 			// Grouped products.
@@ -492,7 +496,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 		/**
 		 * Calculate price.
 		 *
-		 * @version 2.3.0
+		 * @version 2.3.1
 		 * @since   1.0.0
 		 *
 		 * @param float $price       The original price.
@@ -513,7 +517,14 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Core' ) ) :
 
 			// Rounding.
 			$round_func = $this->groups['round_func'][ $group ];
-			if ( $round_func ) {
+			if (
+				$round_func &&
+				in_array(
+					$round_func,
+					array( 'round', 'ceil', 'floor' ),
+					true
+				)
+			) {
 				$return_price = $round_func( $return_price );
 			}
 

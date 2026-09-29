@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Shortcodes Class
  *
- * @version 2.2.2
+ * @version 2.3.1
  * @since   1.7.0
  *
  * @author WPFactory
@@ -17,7 +17,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Shortcodes' ) ) :
 	/**
 	 * Alg_WC_Global_Shop_Discount_Shortcodes class.
 	 *
-	 * @version 2.2.2
+	 * @version 2.3.1
 	 * @since   1.7.0
 	 */
 	class Alg_WC_Global_Shop_Discount_Shortcodes {
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Shortcodes' ) ) :
 		/**
 		 * `[alg_wc_gsd_products]` shortcode.
 		 *
-		 * @version 2.2.2
+		 * @version 2.3.1
 		 * @since   1.5.1
 		 *
 		 * @param array $atts Shortcode attributes.
@@ -122,12 +122,37 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Shortcodes' ) ) :
 				);
 			}
 
-			// Run `[products]` shortcode.
-			return (
+			// Result.
+			$result = (
 				! empty( $product_ids_on_sale ) ?
-				do_shortcode( '[products' . $_atts . ' ids="' . implode( ',', $product_ids_on_sale ) . '"]' ) :
-				( $atts['on_empty'] ? wp_kses_post( $atts['on_empty'] ) : '' )
+				do_shortcode( '[products' . $_atts . ' ids="' . implode( ',', array_map( 'absint', $product_ids_on_sale ) ) . '"]' ) :
+				( $atts['on_empty'] ? $atts['on_empty'] : '' )
 			);
+			return wp_kses(
+				$result,
+				$this->get_allowed_html()
+			);
+		}
+
+		/**
+		 * Get allowed HTML for `wp_kses()`.
+		 *
+		 * @version 2.3.1
+		 * @since   2.3.1
+		 *
+		 * @return array
+		 */
+		public function get_allowed_html() {
+			$allowed_html = wp_kses_allowed_html( 'post' );
+
+			$allowed_html['bdi'] = array();
+
+			$allowed_html['span']['translate'] = true;
+
+			$allowed_html['img']['srcset'] = true;
+			$allowed_html['img']['sizes']  = true;
+
+			return $allowed_html;
 		}
 	}
 

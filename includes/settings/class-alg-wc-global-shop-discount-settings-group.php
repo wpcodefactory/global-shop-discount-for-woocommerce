@@ -2,7 +2,7 @@
 /**
  * Global Shop Discount for WooCommerce - Group Section Settings
  *
- * @version 2.3.0
+ * @version 2.3.1
  * @since   1.0.0
  *
  * @author WPFactory
@@ -17,7 +17,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Settings_Group' ) ) :
 	/**
 	 * Alg_WC_Global_Shop_Discount_Settings_Group class.
 	 *
-	 * @version 2.3.0
+	 * @version 2.3.1
 	 * @since   1.0.0
 	 */
 	class Alg_WC_Global_Shop_Discount_Settings_Group extends Alg_WC_Global_Shop_Discount_Settings_Section {
@@ -299,7 +299,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Settings_Group' ) ) :
 		/**
 		 * Get settings.
 		 *
-		 * @version 2.3.0
+		 * @version 2.3.1
 		 * @since   1.0.0
 		 *
 		 * @todo (dev) AJAX for terms and users selectors.
@@ -479,7 +479,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Settings_Group' ) ) :
 						'class'             => 'wc-product-search',
 						'options'           => $this->get_product_options( 'alg_wc_global_shop_discount_products_incl', $i ),
 						'custom_attributes' => array(
-							'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+							'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'global-shop-discount-for-woocommerce' ),
 							'data-action'      => 'woocommerce_json_search_products_and_variations',
 						),
 					),
@@ -492,7 +492,7 @@ if ( ! class_exists( 'Alg_WC_Global_Shop_Discount_Settings_Group' ) ) :
 						'class'             => 'wc-product-search',
 						'options'           => $this->get_product_options( 'alg_wc_global_shop_discount_products_excl', $i ),
 						'custom_attributes' => array(
-							'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'woocommerce' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+							'data-placeholder' => esc_attr__( 'Search for a product&hellip;', 'global-shop-discount-for-woocommerce' ),
 							'data-action'      => 'woocommerce_json_search_products_and_variations',
 						),
 					),

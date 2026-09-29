@@ -3,7 +3,7 @@
  * Plugin Name: Sitewide Discount for WooCommerce: Apply Discount to All Products
  * Plugin URI: https://wpfactory.com/item/global-shop-discount-for-woocommerce/
  * Description: Add global shop discount to all WooCommerce products. Beautifully.
- * Version: 2.3.0
+ * Version: 2.3.1
  * Author: WPFactory
  * Author URI: https://wpfactory.com
  * Requires at least: 4.8
@@ -51,7 +51,7 @@ if ( 'global-shop-discount-for-woocommerce.php' === basename( __FILE__ ) ) {
  * @version 1.0.0
  * @since   1.0.0
  */
-defined( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_VERSION' ) || define( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_VERSION', '2.3.0' );
+defined( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_VERSION' ) || define( 'ALG_WC_GLOBAL_SHOP_DISCOUNT_VERSION', '2.3.1' );
 
 /**
  * Plugin file.
